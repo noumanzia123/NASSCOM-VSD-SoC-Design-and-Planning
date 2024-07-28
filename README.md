@@ -48,7 +48,7 @@ large wires result in large capacitance. The buffer placement is shown below
 To ensure a smooth floorplanning process, designers must pay attention to certain variables, known as switches, which can significantly impact the floorplan. 
 For instance, the utilization factor and aspect ratio are among the important switches. 
 Designers need to verify that these parameters align with the project requirements before initiating the floorplanning stage. 
-The file _README.md_  displays the different variables of the design flow. The path is shown below :
+The file _README.md_  in the openlane configuration displays the different variables of the design flow. The path is shown below :
 ```
 /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration
 ```
@@ -56,16 +56,27 @@ The file _README.md_  displays the different variables of the design flow. The p
 
 The image below illustrates various types of switches involved in the floorplanning phase and their description.
 ![image](https://github.com/user-attachments/assets/09b5c690-8318-4a79-a764-951d6043c29c)
+
 One can set any of these variables depending on where we are in the flow.
 
-* In the configuration folder of the openlane directory, there is a _floorplan.tcl_ file,  which includes the default floorplan settings for openlane.
-The file path is shown in the image below
-![image](https://github.com/user-attachments/assets/59da6a48-b544-4209-98aa-a5618ea858ba)
+* The default value of these variables is set in the  _floorplan.tcl_ file of openlane configuration. The file path is the same as for _README.md_ and is shown below :
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration
+```
+![image](https://github.com/user-attachments/assets/9267d8b0-ceb6-4677-aeb6-f3b508e9e084)
 
-
+In the figure above several floorplan variables are set by default. One important variable to mention here is** FP_IO_MODE** which is '1' when IO pins are equidistant and for '0' is is not.
 * In the picorv32a design, there are _config.tcl_ and _sky130A_sky130_fd_sc_hd_config.tcl_ files which contain design-specific floorplan settings. 
 The file path is shown in the image below:
+
 ![image](https://github.com/user-attachments/assets/28f3bbe2-552e-4e43-baba-952ddb5c220b)
+
+The file contents of _sky130A_sky130_fd_sc_hd_config.tcl_ is shown below
+![image](https://github.com/user-attachments/assets/d44738ca-58fe-44c3-a465-ca594fc5bca6)
+
+
+The file contents of _config.tcl_ is shown below file
+![image](https://github.com/user-attachments/assets/47a741d5-8e56-41a5-859a-10831525c622)
 
 The priority is given to _sky130A_sky130_fd_sc_hd_config.tcl_, then _config.tcl _and then to the default _floorplan.tcl_ file above.
 
@@ -91,11 +102,11 @@ under the directory path:
 ```
 /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration
 ```
-![image](https://github.com/user-attachments/assets/6fc649d5-ea91-4331-9a4c-24a27b655b6f)
-
-**PL_TARGET_DENSITY:** describes placement density of cells in the core. It reflects how spread the cells would be in the core area. 
+The variable **PL_TARGET_DENSITY:** describes the placement density of cells in the core. It reflects how spread the cells would be in the core area. 
 1 = closely dense, 0= widely spread (Default: `0.55`). Initially, the placement is coarse to avoid congestion. When the design approach towards closing then timing
 constraints come in, where the cells would be closed as much as possible to avoid delays.
+
+![image](https://github.com/user-attachments/assets/6fc649d5-ea91-4331-9a4c-24a27b655b6f)
 
 The placement step comprises two main phases:
 
