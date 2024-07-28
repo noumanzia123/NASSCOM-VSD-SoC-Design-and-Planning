@@ -78,6 +78,14 @@ The file contents of _sky130A_sky130_fd_sc_hd_config.tcl_ is shown below
 The file contents of _config.tcl_ is shown below file
 ![image](https://github.com/user-attachments/assets/47a741d5-8e56-41a5-859a-10831525c622)
 
+The core utilization and IO metal layers are added in the file through following text
+```
+set ::env(CLOCK_NET) $::env(CLOCK_PORT)
+set ::env(FP_CORE_UTIL) 65 
+set ::env(FP_IO_VMETAL) 4
+set ::env(FP_IO_HMETAL) 3
+```
+
 The priority is given to _sky130A_sky130_fd_sc_hd_config.tcl_, then _config.tcl _and then to the default _floorplan.tcl_ file above.
 
 
@@ -85,8 +93,29 @@ The priority is given to _sky130A_sky130_fd_sc_hd_config.tcl_, then _config.tcl 
 
 
 ## Review floorplan files
+After floorplan execution we go to the _runs_ folder of picorv32a and open the latest date file name. Here one can check the implemented floorplan variables from the logs. 
+The file name _ioPlacer.log_ will give metal layers number for verical and horizontal IO pins. The path to the file is below:
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/logs/floorplan
+```
+![image](https://github.com/user-attachments/assets/78509e67-8751-4889-bc4e-7f0e2a810242)
+
+The contents of file are shown below
+![image](https://github.com/user-attachments/assets/c67d5f7b-953b-482b-b1f7-4bf4dfec2bf3)
+
+Remember that if FP_IO_VMETAL was set to 4, the floorplan will have the FP_IO_VMETAL 5 and similarly if FP_IO_HMETAL was set to 3, the floorplan will have the FP_IO_HMETAL 4.
+
+Now to check what configuration settings were used to run floorplan we can open the _config.tcl_ from the directory given below
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33
+```
+![image](https://github.com/user-attachments/assets/43876961-bcc4-4c17-aed4-e37a85c63325)
+
+The above figure shows that **FP_CORE_UTIL = 35, FP_IO_HMETAL = 4 and FP_IO_VMETAL = 3.**
+
 
 ## Review floorplan layout in magic
+
 
 **Important steps to review floorplan in magic**
 Action | Steps 
