@@ -116,6 +116,21 @@ The above figure shows that **FP_CORE_UTIL = 35, FP_IO_HMETAL = 4 and FP_IO_VMET
 
 ## Review floorplan layout in magic
 
+When the floorplaning is completed, to view the results go to the path as shown below :
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/results/floorplan
+```
+![image](https://github.com/user-attachments/assets/d366b180-139e-47e3-9e90-f754c7ee8805)
+
+open the design exchanfe file (.def):
+These results are useful. For example: we can see the die area :
+![image](https://github.com/user-attachments/assets/0d3c43b7-9e3d-4dbb-b4bf-c3d20656b50d)
+1µm = 1000 data base units and therefore 
+
+Now, to open this ".def" file in magic , use the following command:
+```
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def
+```
 
 **Important steps to review floorplan in magic**
 Action | Steps 
