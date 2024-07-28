@@ -40,7 +40,12 @@ Based on the estimated positioning of the blocks the buffers/repeaters are place
 large wires result in large capacitance. The buffer placement is shown below
 ![image](https://github.com/user-attachments/assets/8ffefe36-2851-49f2-9937-5d5d88d7e711)
 
+## CELL DESIGN AND CHARACTERISATION FLOWS
+* **Standard Cells:** These are basic logic gates (like NAND, NOR, XOR, etc.) or more complex functional blocks (like flip-flops or adders) designed to be reusable across different IC designs. They are characterized by their functionality, area, power consumption, and timing characteristics.
 
+* **Library:** In the context of IC design, a library (or cell library) consists of a collection of standard cells.
+
+  Each cell in the library is optimized for specific parameters such as speed (delay), power consumption, area (size), and drive strength.
 
 # LAB 2: FLOORPLANNING & PLACEMENT
 
@@ -125,7 +130,8 @@ When the floorplaning is completed, to view the results go to the path as shown 
 open the design exchanfe file (.def):
 These results are useful. For example: we can see the die area :
 ![image](https://github.com/user-attachments/assets/0d3c43b7-9e3d-4dbb-b4bf-c3d20656b50d)
-1µm = 1000 data base units and therefore 
+
+1µm = 1000 data base units and therefore the area is (0 0) (660.6µm 671.4µm)
 
 Now, to open this ".def" file in magic , use the following command:
 ```
@@ -138,6 +144,13 @@ Action | Steps
 Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it vertically to the middle of the screen.
 Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it vertically to the middle of the screen.
 Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it vertically to the middle of the screen.
+
+<img width="490" alt="image" src="https://github.com/user-attachments/assets/655325c8-1702-4494-aea1-c850d8c8f513">
+
+<img width="470" alt="image" src="https://github.com/user-attachments/assets/836df4d9-8545-43c3-937d-cf45b3b49d24">
+
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/76ec4a65-69ba-4592-93b8-6dd1c1fd5bb7">
+
 
 ## Placement in openlane
 
@@ -161,6 +174,7 @@ designated site rows. To initiate the placement process, use the following comma
 ```
 run_placement
 ```
+During placement execution the reduction of half parameter wire length is the main focus. The placement is stop when the overflow is converged
 After the Placement is done. To view the results Go to the following location:
 ```
 /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/20-07_16-44/results/placement
@@ -170,3 +184,9 @@ And then we can see 'picorv32a.placement.def' file. To open it using MAGIC use t
 ```
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def
 ```
+
+![image](https://github.com/user-attachments/assets/0b680081-0bfa-4fcf-97f4-df6021a3aa33)
+
+<img width="635" alt="image" src="https://github.com/user-attachments/assets/d8abc2cd-e549-43ca-ba6c-d203ff721da8">
+
+
