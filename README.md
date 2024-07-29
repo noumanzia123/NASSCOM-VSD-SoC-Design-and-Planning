@@ -70,7 +70,7 @@ One can set any of these variables depending on where we are in the flow.
 ```
 ![image](https://github.com/user-attachments/assets/9267d8b0-ceb6-4677-aeb6-f3b508e9e084)
 
-In the figure above several floorplan variables are set by default. One important variable to mention here is** FP_IO_MODE** which is '1' when IO pins are equidistant and for '0' is is not.
+In the figure above several floorplan variables are set by default. One important variable to mention here is **FP_IO_MODE** which is '1' when IO pins are equidistant and for '0' is is not.
 * In the picorv32a design, there are _config.tcl_ and _sky130A_sky130_fd_sc_hd_config.tcl_ files which contain design-specific floorplan settings. 
 The file path is shown in the image below:
 
