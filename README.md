@@ -285,11 +285,30 @@ magic -T sky130A.tech sky130_inv.mag &
 
 ![image](https://github.com/user-attachments/assets/75cae491-1763-4a4d-8cb4-8befff7bb9b2)
 
-## INTRODUCTION TO SKY130 BASIC LAYERS LAYOUT AND LEF USING INVERTER
+## SKY130 INVERTER LAYOUT BASIC LAYERS 
 
-The source, drain, gate, VDD, and ground terminals of the inverter opened in magics are shown in Figure below. When polysilicon crosses the ndiffusion region it is termed as 'NMOS' and when it crosses the pdiffusion region it is termed as 'PMOS', same is verified in image below:
+The source, drain, gate, VDD, and ground terminals of the inverter opened in the magic tool are shown in Figure below. 
+When polysilicon crosses the ndiffusion region it is termed as 'NMOS' and when it crosses the pdiffusion region it is termed as 'PMOS', the same is verified in the image below:
 
 <image src = "https://github.com/user-attachments/assets/65412cfb-bc71-41b4-b827-c4525de7e3f5" width="500" height="500" >
+
+## STEPS TO CREATE SRD CELL LAYOUT
+
+Details to create a std cell layout are here [Click here](https://github.com/nickson-jose/vsdstdcelldesign?tab=readme-ov-file)
+
+## EXTRACT THE SPICE NETLIST IN MAGIC
+In the tckon window, use the following command:
+```
+extract all
+ext2spice cthresh 0 rthresh 0
+ext2spice
+```
+![image](https://github.com/user-attachments/assets/5061124b-37e9-463d-a2e9-aa9a9cbfb147)
+
+![image](https://github.com/user-attachments/assets/0e526a51-7f51-4564-8d41-2a9d1123e294)
+
+Now let's open the extracted SPICE file of sky130A inverter
+![image](https://github.com/user-attachments/assets/84cd55e0-104f-486c-aa62-6c3b891d4930)
 
 
 
