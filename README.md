@@ -314,7 +314,7 @@ Now let's open the extracted SPICE file of sky130A inverter
 ## Create final SPICE deck using Sky130 tech
 Make the following changes in the '_sky130_inv.spice_' file:
 
-![image](https://github.com/user-attachments/assets/21c1b146-08aa-4166-8971-754a8649a5df)
+![image](https://github.com/user-attachments/assets/6bb40648-5912-49f7-88c5-a82445f6562f)
 
 Now before running the _sky130_inv.spice_ file let's check the model files (nshort.lib and pshort.lib) under the libs directory.
 ![image](https://github.com/user-attachments/assets/44979c5e-3473-4570-9cc4-cef72ae77e9f)
@@ -327,6 +327,11 @@ ngspice sky130_inv.spice
 Now, to open the plot use ```plot y vs time a```  in the ngspice terminal
 
 ![image](https://github.com/user-attachments/assets/d9c38300-4f8a-4b99-b5c8-7b8678e98138)
+
+As we see the spikes are a bit larger at the edges of inverter output. 
+We can increase the value of load capacitor (C3) in spice netlist to 2fF. 
+The results shown below.
+![image](https://github.com/user-attachments/assets/13ff72a8-e892-46b9-9e9e-ce49f5269608)
 
 
 
