@@ -324,8 +324,10 @@ Now to simulate in **ngspice**, use the following command while in the 'vsdstdce
 ```
 ngspice sky130_inv.spice
 ```
+Now, to open the plot use ```plot y vs time a```  in the ngspice terminal
+
 ![image](https://github.com/user-attachments/assets/d9c38300-4f8a-4b99-b5c8-7b8678e98138)
 
-Now, to open the plot use ```plot y vs time a```  in ngspice terminal
+
 
 
