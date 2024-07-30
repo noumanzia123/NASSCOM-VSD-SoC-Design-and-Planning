@@ -88,7 +88,11 @@ One can set any of these variables depending on where we are in the flow.
 ```
 ![image](https://github.com/user-attachments/assets/9267d8b0-ceb6-4677-aeb6-f3b508e9e084)
 
-In the figure above several floorplan variables are set by default. One important variable to mention here is **FP_IO_MODE** which is '1' when IO pins are equidistant and for '0' is is not.
+In the figure above several floorplan variables are set by default. One important variable to mention here is **FP_IO_MODE** below:
+```
+set ::env(FP_IO_MODE) 1; # 0 matching mode - 1 random equidistant mode
+```
+which is set as '1' when IO pins are random equidistant.
 * In the picorv32a design, there are _config.tcl_ and _sky130A_sky130_fd_sc_hd_config.tcl_ files which contain design-specific floorplan settings. 
 The file path is shown in the image below:
 
@@ -217,7 +221,45 @@ One can change the floorplan variables like core utilization and IO mode
 /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/results/floorplan
 ```
 
-Then use the command to open the 'def' file in magic:
+Then use the command to open the '.def' file in magic:
 ```
  magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def
 ```
+
+![image](https://github.com/user-attachments/assets/1807d4f2-b6f0-487d-ac58-3ceb942f87b6)
+As we can see pins are randomly equidistant. There are four strategies supported by IO placer (Open source EDA tool). 
+Now, if want it to change to some other IO pins strategy, first go to the following directory and open _floorplan.tcl_ file:
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration
+```
+
+![image](https://github.com/user-attachments/assets/aa38c38a-6754-4fbc-beb4-7b68bfdd05da)
+
+From here we can see the switching variable **FP_IO_MODE = 1**, hence pins are randomly equidistant. Now, we run the following command and change the IO placer settings:
+```
+set ::env(FP_IO_MODE) 2
+```
+Go to the following tab as shown below to run the command to change IO placer settings and run the floorplan again.
+![image](https://github.com/user-attachments/assets/ab53d829-9875-48b1-9bfb-3f0a7f210270)
+
+ Now, we can check the change in the IO placer strategy: We can see that _.def_ file has been updated from the time stamps and date:
+ 
+ ![image](https://github.com/user-attachments/assets/eddeb530-db58-4f4d-8d86-516d7750446a)
+
+ Now, let us open it in magic using the earlier used command and we see that IO pin configuration is changed
+
+![image](https://github.com/user-attachments/assets/6f83ebd8-84ea-478d-91cf-84d7bb20c128)
+
+
+## Steps to get clone of git "vsdstdcelldesign" repo
+
+The repository "vsdstdcelldesign" contains the _.mag_ file for the inverter and spice models for sky130 nmos/pmos transistors.
+
+Got to the openlane directory and run the following command to clone the git repository:
+```
+git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+```
+![image](https://github.com/user-attachments/assets/1e1f7759-6098-4136-bd07-da9e49a831f6)
+
+As we can see from the above image the repo has been successfully copied to the openlane directory.
+
