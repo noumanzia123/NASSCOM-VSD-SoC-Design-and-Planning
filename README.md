@@ -354,6 +354,9 @@ From plot points: Input(x0 = 2.15018ns, y0 = 1.65018) to Output(x0 = 2.21088ns, 
 
 From plot points: (x0 = 4.04997ns, y0 = 1.65) to (x0 = 4.07748ns, y0 = 1.65). Calculated Cell Fall Delay = 0.0277 ns
 
-With these parameters successfully characterized, the next step is to create a LEF file.
+We have now characterized the inverter cell for a room temperature of 27 degC. Similarly, this cell can be characterized for different process, voltage, and temperature (PVT) corners to fully
+characterize this cell for different PVT corners.
+
+With these parameters successfully characterized, the next step is to create a LEF file from this cell, which will be used in openlane picorv32a design.
 
 
