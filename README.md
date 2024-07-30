@@ -310,7 +310,22 @@ ext2spice
 Now let's open the extracted SPICE file of sky130A inverter
 ![image](https://github.com/user-attachments/assets/b06d14d6-187c-4b1d-845a-e4739b783014)
 
+# SKY130 TECH FILE LABS
+## Create final SPICE deck using Sky130 tech
+Make the following changes in the '_sky130_inv.spice_' file:
 
+![image](https://github.com/user-attachments/assets/21c1b146-08aa-4166-8971-754a8649a5df)
 
+Now before running the _sky130_inv.spice_ file let's check the model files (nshort.lib and pshort.lib) under the libs directory.
+![image](https://github.com/user-attachments/assets/44979c5e-3473-4570-9cc4-cef72ae77e9f)
+
+Now to simulate in **ngspice**, use the following command while in the 'vsdstdcelldesign' directory:
+
+```
+ngspice sky130_inv.spice
+```
+![image](https://github.com/user-attachments/assets/d9c38300-4f8a-4b99-b5c8-7b8678e98138)
+
+Now, to open the plot use ```plot y vs time a```  in ngspice terminal
 
 
