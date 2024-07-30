@@ -6,7 +6,7 @@
 ## What is an RTL to GDSII flow?
 
 # LAB 1: OPEN-SOURCE EDA, OPENLANE & SKY130 PDK
-
+Characterization of Synthesized Results
 ## Directory structure in openlane
 
 ## Design Preparation Step
@@ -14,7 +14,25 @@
 ## Review files after design prep and run synthesis
 
 ## Characterization of Synthesized Results
-asdsadasdasdasdsdas
+First, we calculate the flip-flop ratio. Now, if we see the synthesized results we find that
+```
+Number of D Flipflops : 1613
+Total number of Cells : 14876
+```
+![image](https://github.com/user-attachments/assets/ed93bbb4-4d19-42d3-88ce-cf1d5a8f89e8)
+
+Hence, flip flop ratio = (Number of D Flipflops)/(Total number of Cells) and Flipflop percentage = FF ratio * 100
+```
+FF Ratio : 0.1084
+FF Percentage : 10.84 %
+```
+
+Also, Now if we go to:
+```
+/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/11-07_06-37/results/synthesis$
+```
+we can find the synthesis results stored here now.
+
 # THEORY 2: GOOD FLOORPLAN VS BAD FLOORPLAN & INTRODUCTION TO LIBRARY CELLS
 ## LIBRARY BINDING AND PLACEMENTS
 ### Netlist binding and initial place design
@@ -177,7 +195,7 @@ run_placement
 During placement execution the reduction of half parameter wire length is the main focus. The placement is stop when the overflow is converged
 After the Placement is done. To view the results Go to the following location:
 ```
-/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/20-07_16-44/results/placement
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/results/placement
 ```
 
 And then we can see 'picorv32a.placement.def' file. To open it using MAGIC use the following command:
@@ -189,4 +207,17 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 
 <img width="635" alt="image" src="https://github.com/user-attachments/assets/d8abc2cd-e549-43ca-ba6c-d203ff721da8">
 
+# LAB 3: INTRODUCTION TO SKY130A
 
+## HOW TO MAKE CHANGES WHILE BEING IN THE FLOW?
+One can change the floorplan variables like core utilization and IO mode
+**Example** : TO CHANGE THE IO pins alignment in the layout, first we can verify the current configuration of the Pins, Go to the following directory as shown in the image below:
+
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/results/floorplan
+```
+
+Then use the command to open the 'def' file in magic:
+```
+ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def
+```
