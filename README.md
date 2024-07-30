@@ -308,7 +308,8 @@ ext2spice
 ![image](https://github.com/user-attachments/assets/0e526a51-7f51-4564-8d41-2a9d1123e294)
 
 Now let's open the extracted SPICE file of sky130A inverter
-![image](https://github.com/user-attachments/assets/84cd55e0-104f-486c-aa62-6c3b891d4930)
+![image](https://github.com/user-attachments/assets/b06d14d6-187c-4b1d-845a-e4739b783014)
+
 
 
 
