@@ -8,7 +8,9 @@
 ## Different files in workflow?
 * **Library Exchange Format (LEF) file**: Place and route (PnR) does not need information about the logic or complete layout.
 It just needs the pin positions and boundary information. This minimal and abstract information is provided to the tool by the LEF file.
-LEF file also serves the purpose of protecting intellectual property. LEF file contains the metal layers and pin locations.  
+LEF file also serves the purpose of protecting intellectual property. LEF file contains the metal layers and pin locations. the difference between layout and LEF file is shown below:
+![image](https://github.com/user-attachments/assets/4b9826d9-31d5-4588-9c4e-7651f074ffa8)
+
 
 # LAB 1: OPEN-SOURCE EDA, OPENLANE & SKY130 PDK
 Characterization of Synthesized Results
