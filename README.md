@@ -5,6 +5,11 @@
 
 ## What is an RTL to GDSII flow?
 
+## Different files in workflow?
+* **Library Exchange Format (LEF) file**: Place and route (PnR) does not need information about the logic or complete layout.
+It just needs the pin positions and boundary information. This minimal and abstract information is provided to the tool by the LEF file.
+LEF file also serves the purpose of protecting intellectual property. LEF file contains the metal layers and pin locations.  
+
 # LAB 1: OPEN-SOURCE EDA, OPENLANE & SKY130 PDK
 Characterization of Synthesized Results
 ## Directory structure in openlane
@@ -275,3 +280,15 @@ Now, open the _sky130_inv.mag_ file in magic:
 ```
 magic -T sky130A.tech sky130_inv.mag &
 ```
+
+![image](https://github.com/user-attachments/assets/75cae491-1763-4a4d-8cb4-8befff7bb9b2)
+
+## INTRODUCTION TO SKY130 BASIC LAYERS LAYOUT AND LEF USING INVERTER
+
+The source, drain, gate, VDD, and ground terminals of the inverter opened in magics are shown in Figure below. When polysilicon crosses the ndiffusion region it is termed as 'NMOS' and when it crosses the pdiffusion region it is termed as 'PMOS', same is verified in image below:
+
+<image src = "https://github.com/user-attachments/assets/65412cfb-bc71-41b4-b827-c4525de7e3f5" width="500" height="500" >
+
+
+
+
