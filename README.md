@@ -261,5 +261,17 @@ git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 ```
 ![image](https://github.com/user-attachments/assets/1e1f7759-6098-4136-bd07-da9e49a831f6)
 
-As we can see from the above image the repo has been successfully copied to the openlane directory.
+As we can see from the above image the repo has been successfully copied to the openlane directory. Now, we will open the _.mag_ file and to do that we require the _sky130A.tech_ file from the following directory:
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic
+```
+we copy the file using the following command
+```
+cp sky130A.tech /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+```
+![image](https://github.com/user-attachments/assets/c69fb6bf-13b6-41da-9cd7-53fb42cd155a)
 
+Now, open the _sky130_inv.mag_ file in magic:
+```
+magic -T sky130A.tech sky130_inv.mag &
+```
