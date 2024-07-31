@@ -359,7 +359,7 @@ From plot points: (x0 = 4.04997ns, y0 = 1.65) to (x0 = 4.07748ns, y0 = 1.65). Ca
 We have now characterized the inverter cell for a room temperature of 27 degC. Similarly, this cell can be characterized for different process, voltage, and temperature (PVT) corners to fully
 characterize this cell for different PVT corners.
 
-With these parameters successfully characterized, the next step is to create a LEF file from this cell, which will be used in openlane picorv32a design.
+With these parameters successfully characterized, the next step is to create a LEF file from this cell, which will be plugged into openlane picorv32a design flow.
 
 ## INTRODUCTION TO MAGIC TOOL AND DRC RULES
 
@@ -396,11 +396,75 @@ Now open the _met3.mag_ file in magic.
 Open the _poly.mag_ file in magic
 ![image](https://github.com/user-attachments/assets/c031f955-df01-4394-bad3-1914ac6735d6)
 
-
+Zoom in on the "Incorrect poly.p" layout and measure the spacing between the poly resistor and poly, using the "box" command.
+The measurement shows a spacing of 0.210 µm, which is smaller than the "poly.9" DRC rule (0.480 µm). But, we do not get a DRC error. 
+Let's correct this problem.
 ![image](https://github.com/user-attachments/assets/1dc2220c-fbbb-4657-aed9-a350615bdaba)
 
-
 ![image](https://github.com/user-attachments/assets/6e466798-cb03-4479-a6b5-8c851c211531)
+
+Open the _Sky130a.tech_ file located in the drc_tests directory. Search for the "poly.9" keyword and apply the changes shown in the images below. Save the file after making the modifications.
+
+![image](https://github.com/user-attachments/assets/b09a5dd1-c5c2-4e5b-ab85-d49484d353ed)
+
+Reload the _sky130A.tech_ file and re-run the DRC check by running the following commands in tkcon 2.3
+```
+tech load sky130A.tech
+drc check
+```
+Now we see that DRC error is shown by magic.
+![image](https://github.com/user-attachments/assets/12e8e56d-0e85-44bb-bf25-64d51ce7e7ef)
+
+# LAB 4: PRE-LAYOUT TIMING ANALYSIS & IMPORTANCE OF GOOD CLOCK TREE
+
+## Steps to convert the Grid Info to Track Info
+
+**Certain conditions for making a standard cell are**: 1) The input and output ports should lie on the intersection of the vertical and horizontal tracks, 2) the width of the std cells should be odd multiple of the
+track horizontal pitch and height should be odd multiple of track vertical pitch. 
+To check the track go to the following directory
+
+**Tracks:** Tracks are used in routing stages, where routes are metal traces (met1, met2, ...). Track information tells where the routes (metal layers) will go during the routing stage. During PnR we need to specify where the routes will go 
+and this info is given by tracks.  _tracks.info_ can be found from the following path
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd
+```
+open the tracks.info file
+```
+less tracks.info
+```
+Open the file name _tracks.info_. This file specifies pitch, spacing, and other relevant details necessary for efficient routing. Each metal layer has an X and Y direction.
+![image](https://github.com/user-attachments/assets/5e81a07a-2c58-4812-be1b-d9b0bdd73f4c)
+
+
+* Now to open the custom Inverter Layout in Magic, first go to the 'vsdstdcelldesign' directory and then run command:
+```
+magic -T sky130A.tech sky130_inv.mag &
+```
+Ports are in the li1 (loci) metal layer and we check if these ports are on the intersection of the li1 () horizontal and vertical track. To check this, in magic press G to turn on the grids
+
+To set grids as tracks of locali layer, use the following command:
+```
+grid 0.46um 0.34um 0.23um 0.17um
+```
+![image](https://github.com/user-attachments/assets/46bdd678-9377-40e3-8110-babdea509036)
+
+li1 layer is fully on the grid layer. We can see that input and output ports lie on the intersections of vertical and horizontal tracks. This satisfies the condition 1.
+
+![image](https://github.com/user-attachments/assets/e7104d96-4fda-40b9-8495-8b235085f8a0)
+
+We can also see that the width of the std cell is equal to the 3 grid/track boxes. As mentioned the standard cell's width should be an odd multiple of the horizontal track pitch, 
+and its height should be an odd multiple of the vertical track pitch. This satisfies the condition 2.
+![image](https://github.com/user-attachments/assets/6844d7e5-4454-4c93-9562-6a900c1ed247)
+
+![image](https://github.com/user-attachments/assets/ab3e1532-3d42-475f-9f91-37744a1d2439)
+
+
+
+
+
+
+
+
 
 
 
