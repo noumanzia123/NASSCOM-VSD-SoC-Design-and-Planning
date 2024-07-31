@@ -510,6 +510,8 @@ Let's open the LEF file
 
 ![image](https://github.com/user-attachments/assets/7b6f0b07-489d-401b-939f-e1b04ece04f1)
 
+Next we plug in the LEF file in picorv32a design.
+
 
 
 
