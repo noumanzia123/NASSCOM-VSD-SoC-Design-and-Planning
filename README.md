@@ -448,17 +448,18 @@ grid 0.46um 0.34um 0.23um 0.17um
 ```
 ![image](https://github.com/user-attachments/assets/46bdd678-9377-40e3-8110-babdea509036)
 
-li1 layer is fully on the grid layer. We can see that input and output ports lie on the intersections of vertical and horizontal tracks. This satisfies the condition 1.
+* li1 layer is fully on the grid layer. We can see that input and output ports lie on the intersections of vertical and horizontal tracks. This satisfies the condition 1.
 
 ![image](https://github.com/user-attachments/assets/e7104d96-4fda-40b9-8495-8b235085f8a0)
 
-We can also see that the width of the std cell is equal to the 3 grid/track boxes. As mentioned the standard cell's width should be an odd multiple of the horizontal track pitch, 
+* We can also see that the width of the std cell is equal to the 3 grid/track boxes. As mentioned the standard cell's width should be an odd multiple of the horizontal track pitch, 
 and its height should be an odd multiple of the vertical track pitch. This satisfies the condition 2.
 ![image](https://github.com/user-attachments/assets/6844d7e5-4454-4c93-9562-6a900c1ed247)
 
 ![image](https://github.com/user-attachments/assets/ab3e1532-3d42-475f-9f91-37744a1d2439)
 
-
+* Now to convert the label to a part of LFE file: select the port and open file-->text. Then fill the entries as shown below [No need to do it here as it is already done]:
+![image](https://github.com/user-attachments/assets/e2921c35-43ce-4cbc-8b2d-0837a280fd4d)
 
 
 
