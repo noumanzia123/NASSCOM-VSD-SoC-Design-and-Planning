@@ -457,6 +457,7 @@ and its height should be an odd multiple of the vertical track pitch. This satis
 ![image](https://github.com/user-attachments/assets/6844d7e5-4454-4c93-9562-6a900c1ed247)
 
 ![image](https://github.com/user-attachments/assets/ab3e1532-3d42-475f-9f91-37744a1d2439)
+## Converting magic layout to standard cell LEF
 
 * **Create port definition:** Now to convert the label to a port for LFE abstraction select the port region and open file-->text. Then fill in the entries as shown below [No need to do it here as it is already done]:
 ![image](https://github.com/user-attachments/assets/e2921c35-43ce-4cbc-8b2d-0837a280fd4d)
@@ -491,6 +492,23 @@ port class inout
 port use ground
 ```
 ![image](https://github.com/user-attachments/assets/caf65580-9734-4437-a17a-9897b173dac0)
+
+Now we need to extract the LEF file. Before that, lets save .mag file by using the command ``save sky130_vsdinv.mag``` in the tkcon terminal.
+
+Now, use the following command to open the saved mag file:
+```
+magic -T sky130A.tch sky130_vsdinv.mag &
+```
+To extract the LEF file, use the following command in tckon window:
+
+```
+lef write
+```
+![image](https://github.com/user-attachments/assets/4754d606-73ef-48d7-88aa-562fe56449ed)
+
+Let's open the LEF file
+
+![image](https://github.com/user-attachments/assets/7b6f0b07-489d-401b-939f-e1b04ece04f1)
 
 
 
