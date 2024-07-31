@@ -368,9 +368,40 @@ The details about the MAGIC tool and its DRC rules can be seen [here](http://ope
 ## INTRODUCTION TO SKY130 PDK
 
 SKYWATER SKY130 PKD documentation can be found [here](https://skywater-pdk.readthedocs.io/en/main/). 
-We use the following command to download the Lab files used in this tutorial. The pwd should be the home directory:
+We use the following command to download the Lab files used in this tutorial. The current location should be the home directory:
 
 ```
 sudo wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
 ```
+Once downloaded the zip file we extract it using the command
+
+```
+sudo tar xfz drc_tests.tgz
+```
+
+![image](https://github.com/user-attachments/assets/2edf16fe-2b29-4148-8ba1-5780800ceaaf)
+
+In the downloaded files, the .magicrc file serves as the start-up script for MAGIC.
+
+## INTRODUCTION TO MAGIC & STEPS TO LOAD SKY130 TECH-RULES
+
+Run the ```command magic -d XR``` to open the Magic tool.
+
+Now open the _met3.mag_ file in magic.
+
+![image](https://github.com/user-attachments/assets/d5364299-6d90-4efd-a168-f332c7b401f7)
+
+## FIXING POLY.9 ERROR IN SKY120 TECH FILE
+
+Open the _poly.mag_ file in magic
+![image](https://github.com/user-attachments/assets/c031f955-df01-4394-bad3-1914ac6735d6)
+
+
+![image](https://github.com/user-attachments/assets/1dc2220c-fbbb-4657-aed9-a350615bdaba)
+
+
+![image](https://github.com/user-attachments/assets/6e466798-cb03-4479-a6b5-8c851c211531)
+
+
+
 
