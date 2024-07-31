@@ -458,8 +458,41 @@ and its height should be an odd multiple of the vertical track pitch. This satis
 
 ![image](https://github.com/user-attachments/assets/ab3e1532-3d42-475f-9f91-37744a1d2439)
 
-* Now to convert the label to a part of LFE file: select the port and open file-->text. Then fill the entries as shown below [No need to do it here as it is already done]:
+* **Create port definition:** Now to convert the label to a port for LFE abstraction select the port region and open file-->text. Then fill in the entries as shown below [No need to do it here as it is already done]:
 ![image](https://github.com/user-attachments/assets/e2921c35-43ce-4cbc-8b2d-0837a280fd4d)
+
+A similar process is revised for Y, VPWR, and VGND ports. Note that A and Y ports are connected to the _locali_ metal layer, whereas VPWR and VGND ports are connected to the _metal2_ layer.
+* **Port class and port use attributes for a layout:** After port definition, the next step is setting port class and port use attributes. These attributes are used to define the purpose of the port. Class and use properties are used by the LEF format for read-and-write routines. Press the button "s" to select the right port layer, then use the following commands:
+
+```
+# to confirm the port
+what
+# to define the port class and use
+port class input
+port use signal
+```
+![image](https://github.com/user-attachments/assets/9e33c15f-6f69-4bb5-89d6-ffca982802cb)
+
+```
+# for Y port
+port class output
+port use signal
+```
+![image](https://github.com/user-attachments/assets/d00e2331-ea1a-4821-b47d-7b88bdd67f7f)
+```
+# for VPWR port
+port class inout
+port use power
+```
+![image](https://github.com/user-attachments/assets/861ba362-9f4d-459b-a99f-e30b809191bd)
+```
+# for VGND port
+port class inout
+port use ground
+```
+![image](https://github.com/user-attachments/assets/caf65580-9734-4437-a17a-9897b173dac0)
+
+
 
 
 
