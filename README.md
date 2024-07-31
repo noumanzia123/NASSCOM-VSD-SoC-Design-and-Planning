@@ -324,13 +324,15 @@ Now to simulate in **ngspice**, use the following command while in the 'vsdstdce
 ```
 ngspice sky130_inv.spice
 ```
+![image](https://github.com/user-attachments/assets/80d30b3a-120f-45ec-ba24-2b558aa56db6)
+
 Now, to open the plot use ```plot y vs time a```  in the ngspice terminal
 
 ![image](https://github.com/user-attachments/assets/d9c38300-4f8a-4b99-b5c8-7b8678e98138)
 
 As we see the spikes are a bit larger at the edges of inverter output. 
 We can increase the value of load capacitor (C3) in spice netlist to 2fF. 
-The results shown below.
+The results are shown below.
 ![image](https://github.com/user-attachments/assets/13ff72a8-e892-46b9-9e9e-ce49f5269608)
 
 ## CHARACTERIZATION OF INVERTER USING SKY130 TECH FILES
@@ -359,4 +361,16 @@ characterize this cell for different PVT corners.
 
 With these parameters successfully characterized, the next step is to create a LEF file from this cell, which will be used in openlane picorv32a design.
 
+## INTRODUCTION TO MAGIC TOOL AND DRC RULES
+
+The details about the MAGIC tool and its DRC rules can be seen [here](http://opencircuitdesign.com/magic/)
+
+## INTRODUCTION TO SKY130 PDK
+
+SKYWATER SKY130 PKD documentation can be found [here](https://skywater-pdk.readthedocs.io/en/main/). 
+We use the following command to download the Lab files used in this tutorial. The pwd should be the home directory:
+
+```
+sudo wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+```
 
