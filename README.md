@@ -510,7 +510,26 @@ Let's open the LEF file
 
 ![image](https://github.com/user-attachments/assets/7b6f0b07-489d-401b-939f-e1b04ece04f1)
 
-Next we plug in the LEF file in picorv32a design.
+Next, we plug in the LEF file in picorv32a design.
+
+
+## Introduction to timing libs and steps to include new cell in the synthesis
+
+![image](https://github.com/user-attachments/assets/18d830d0-b09e-4b2b-b48b-c81779df8de0)
+
+
+![image](https://github.com/user-attachments/assets/eb1b1e65-9f32-49d4-a8ce-bde6e48fc988)
+
+![image](https://github.com/user-attachments/assets/fbb9c4bb-88af-4433-ae19-575049be03e7)
+
+![image](https://github.com/user-attachments/assets/335283d0-47ba-45f2-80c3-44755f5d308f)
+
+![image](https://github.com/user-attachments/assets/daee63b5-9b87-4c01-8ee6-2ac4ce788056)
+
+![image](https://github.com/user-attachments/assets/65ad0f92-86b0-4b46-990a-8fd8f0450c06)
+
+![image](https://github.com/user-attachments/assets/e81caba5-d17d-4b55-9f06-ee60073c573d)
+
 
 
 
