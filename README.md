@@ -606,6 +606,8 @@ Now, as the floorplan stage is completed, we run placement
 ```
 run_placement
 ```
+![image](https://github.com/user-attachments/assets/45f59a37-050b-4785-a19b-b1a6d2eccf0c)
+
 ![image](https://github.com/user-attachments/assets/e81caba5-d17d-4b55-9f06-ee60073c573d)
 
 
