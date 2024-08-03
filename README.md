@@ -552,13 +552,20 @@ prep -design picorv32a -tag 26-07_10-33 -overwrite
 
 ![image](https://github.com/user-attachments/assets/fbb9c4bb-88af-4433-ae19-575049be03e7)
 
+Include the below command to include the additional lef into the flow:
+```
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+  
+add_lefs -src $lefs
+```
 Now run synthesis ```run_synthesis```
 
 ![image](https://github.com/user-attachments/assets/335283d0-47ba-45f2-80c3-44755f5d308f)
 
 ![image](https://github.com/user-attachments/assets/daee63b5-9b87-4c01-8ee6-2ac4ce788056)
 
-From the figure above it is clear that synthesis was successful. A total of 1554 instances of our _vsdinverter_ are used. We can also see the worst slack is -23.89 and total negative slack is -711.59.
+From the figure above it is clear that synthesis was successful. A total of 1554 instances of our _vsdinverter_ are used. We can also see the worst slack is -23.89 and the total negative slack is -711.59. 
+The chip area is 147712.918 
 
 As we have completed the synthesis stage now we complete the floorplan using the following command:
 ```
