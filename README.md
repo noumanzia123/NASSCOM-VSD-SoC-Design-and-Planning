@@ -567,6 +567,33 @@ Now run synthesis ```run_synthesis```
 From the figure above it is clear that synthesis was successful. A total of 1554 instances of our _vsdinverter_ are used. We can also see the worst slack is -23.89 and the total negative slack is -711.59. 
 The chip area is 147712.918 
 
+At this stage, we can try to minimize the slack by performing a timing-driven synthesis. For this, we have to trade off the chip area to improve the delay.
+
+If we open the README.md from the directory ```/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration```, we see the variable **"SYNTH STRATEGY"**
+```
+“SYNTH STRATEGY | Strategies for abc logic synthesis and technology mapping <br> Possible values are 0, 1 (delay), 2, and 3 (area)<br> (Default: ‘2°)|
+```
+If **"SYNTH STRATEGY"** is 0 or 1 then synthesis is delay-driven and if it is 2, and 3 then it is area driven.
+we check **"SYNTH STRATEGY"** with following command:
+```
+# check the current value
+echo $::env(SYNTH STRATEGY)
+```
+which is "0", therefore synthesis is already delay driven. There are some other variables we can check
+```
+“SYNTH BUFFERING’ | Enables abc cell buffering <br> Enabled
+“SYNTH SIZING’ | Enables abc cell sizing (instead of buffering) <br> Enabled = 1, Disabled = © <br> (Default: ‘@°)|
+“SYNTH DRIVING CELL’ | The cell to drive the input ports. <br>(Defaul
+```
+**SYNTH BUFFERING:** enables the buffers if the fan output is high and it is set to "1" for delay-driven synthesis.
+**SYNTH SIZING:** is upsizing or downsizing the buffers based on delay strategy and we set it "1" for delay-driven synthesis.
+**SYNTH DRIVING CELL:** sets the std cell used to drive the input ports. If the input port has a lot of fan-outs then it needs more drive strength cell to drive the input.
+
+The image below shows that we first check and then set the variables as desired:
+![image](https://github.com/user-attachments/assets/a7ab94cf-6a75-43a0-886c-eca4bf8be6e9)
+
+Now run synthesis ```run_synthesis``` again and see if the delay is improved. From the new synthesis report, we noticed that slack was not changed so it was already optimized.
+
 As we have completed the synthesis stage now we complete the floorplan using the following command:
 ```
 init_floorplan
@@ -582,7 +609,7 @@ run_placement
 ![image](https://github.com/user-attachments/assets/e81caba5-d17d-4b55-9f06-ee60073c573d)
 
 
-Now, to check whether the std cell we have created has been included in the design or not. Go to the following directory :
+Now, to check whether the std cell we have created has been included in the design or not. Go to the following directory:
 ```
 /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/results/placement
 ```
