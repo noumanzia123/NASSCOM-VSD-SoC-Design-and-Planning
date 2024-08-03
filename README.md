@@ -510,33 +510,81 @@ Let's open the LEF file
 
 ![image](https://github.com/user-attachments/assets/7b6f0b07-489d-401b-939f-e1b04ece04f1)
 
-Next, we plug in the LEF file in picorv32a design.
+Next, we plug in the LEF file in the picorv32a design.
 
 
 ## Introduction to timing libs and steps to include new cell in the synthesis
 
+Now we redo the Synthesis, Placement, and Route steps. For this, we add our custom cell in the picorv32a openlane design flow. 
+We make sure that our pwd is ```/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign```.
+From here, we copy the _.lef_ file using the following commands:
+```
+cp sky130_vsdinv.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src
+```
+For the synthesis step, we need the std cell library files. Therefore we copy the _.lib_ files from the directory _vsdstdcelldesign/libs_ using the following commands:
+```
+cp sky130_fd_sc_hd__* /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src
+```
 ![image](https://github.com/user-attachments/assets/18d830d0-b09e-4b2b-b48b-c81779df8de0)
+The _.lib_ file includes the characterization information (cell power, cell rise, cell transition, ...) of every std cell.
+The files _sky130_fd_sc_hd__typical.lib_, _sky130_fd_sc_hd_fast.lib_, and _sky130_fd_sc_hd__slow.lib_ files are defined for different speeds, temperature and voltage values.
+In **sky130_fd_sc_hd__typical.lib** the nmos/pmos transistors are typical (neither fast nor slow) and are characterized at temp. of  25degC and voltage of 1.8V.
+![image](https://github.com/user-attachments/assets/146cbe54-4788-4580-9a05-7b026d18d446)
+In **_sky130_fd_sc_hd__slow.lib** the nmos/pmos transistors are slow or have maximum delays and are characterized at temp. of  100degC and voltage of 1.6V.
+![image](https://github.com/user-attachments/assets/27ad047a-6b64-43b1-b68c-fac2f8ac0880)
+In **_sky130_fd_sc_hd_fast.lib** the nmos/pmos transistors are fast and characterized at temp. of  -40degC and voltage of 1.95V.
+![image](https://github.com/user-attachments/assets/2fed93b1-caa9-4045-8e53-268f4ac08da5)
 
-
+Now, we need to modify the _config.tcl_ file: Go to the _picorv32a_ directory and open the file using vim and we make the following modifications:
 ![image](https://github.com/user-attachments/assets/eb1b1e65-9f32-49d4-a8ce-bde6e48fc988)
+added lines to point to the _lef_ location which is required during spice extraction.
+
+
+Now, invoke the docker and perform the regular steps as shown:
+```
+./flow.tcl -interactive
+package require openlane 0.9
+
+#to continue the work in the already made directory in the runs folder
+prep -design picorv32a -tag 26-07_10-33 -overwrite
+```
+ '-overwrite' will continue the work with the changes we made and overwrite them in '26-07_10-33'.
 
 ![image](https://github.com/user-attachments/assets/fbb9c4bb-88af-4433-ae19-575049be03e7)
+
+Now run synthesis ```run_synthesis```
 
 ![image](https://github.com/user-attachments/assets/335283d0-47ba-45f2-80c3-44755f5d308f)
 
 ![image](https://github.com/user-attachments/assets/daee63b5-9b87-4c01-8ee6-2ac4ce788056)
 
+From the figure above it is clear that synthesis was successful. A total of 1554 instances of our _vsdinverter_ are used. We can also see the worst slack is -23.89 and total negative slack is -711.59.
+
+As we have completed the synthesis stage now we complete the floorplan using the following command:
+```
+init_floorplan
+place_io
+tap_decap_or
+```
 ![image](https://github.com/user-attachments/assets/65ad0f92-86b0-4b46-990a-8fd8f0450c06)
 
+Now, as the floorplan stage is completed, we run placement
+```
+run_placement
+```
 ![image](https://github.com/user-attachments/assets/e81caba5-d17d-4b55-9f06-ee60073c573d)
 
 
+Now, to check whether the std cell we have created has been included in the design or not. Go to the following directory :
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/results/placement
+```
+and use 
+```
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
 
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/d854c642-1f19-4774-93a9-262e3ef6d344)
 
 
 
