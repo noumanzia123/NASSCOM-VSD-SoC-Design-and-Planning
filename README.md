@@ -632,7 +632,7 @@ run_placement
 ![image](https://github.com/user-attachments/assets/565b9565-63a0-4b78-8d47-fcd0f74a13df)
 
 ![image](https://github.com/user-attachments/assets/df5e8a39-9375-4ac8-b390-8139932430da)
-We can also see the **worst slack and the total negative slack is 0**. Similarly, the **slack = data required time - data arrival time = 4.54**
+We can also see the **worst slack and the total negative slack is 0**. Similarly, the _**slack = data required time - data arrival time = 4.54ns**_ **as the slack is positive, so there is no slack violation.**
 
 Now, to check whether the std cell we have created has been included in the design or not. Go to the following directory:
 ```
