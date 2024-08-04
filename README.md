@@ -608,8 +608,12 @@ set ::env(SYNTH_SIZING) 1
 echo $::env(SYNTH_DRIVING_CELL)
 # Now that the design is prepped and ready, we can run synthesis using the following command
 ```
+![image](https://github.com/user-attachments/assets/be69c83c-04ba-4185-ba46-c9bfba1de079)
 
 Now run synthesis ```run_synthesis``` again and see if the delay is improved. From the new synthesis report, we noticed that slack was not changed so it was already optimized.
+![image](https://github.com/user-attachments/assets/c577fc07-e0e8-4abe-998c-1e2f77014667)
+
+![image](https://github.com/user-attachments/assets/b0053411-e188-4f30-b4b2-dfff4669554b)
 
 As we have completed the synthesis stage now we complete the floorplan using the following command:
 ```
@@ -623,9 +627,9 @@ Now, as the floorplan stage is completed, we run placement
 ```
 run_placement
 ```
-![image](https://github.com/user-attachments/assets/45f59a37-050b-4785-a19b-b1a6d2eccf0c)
+![image](https://github.com/user-attachments/assets/565b9565-63a0-4b78-8d47-fcd0f74a13df)
 
-![image](https://github.com/user-attachments/assets/e81caba5-d17d-4b55-9f06-ee60073c573d)
+![image](https://github.com/user-attachments/assets/df5e8a39-9375-4ac8-b390-8139932430da)
 
 
 Now, to check whether the std cell we have created has been included in the design or not. Go to the following directory:
