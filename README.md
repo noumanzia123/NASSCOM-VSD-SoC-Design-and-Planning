@@ -645,6 +645,22 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 
 ![image](https://github.com/user-attachments/assets/d854c642-1f19-4774-93a9-262e3ef6d344)
 
+## Configure OpenSTA for post-synth timing analysis
+
+Let's create an STA conf file (pre_sta.config) first in the directory ```/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane ```. In this file, we provide the fast and slow corner lib file, an old verilog file, and an SDC file. After STA a new Verilog file is created. The file is shown below:
+![image](https://github.com/user-attachments/assets/b887b477-9cfa-4341-976a-19fad4667c2b)
+
+my_base in the directory ```sky130_vsdinv.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src```
+![image](https://github.com/user-attachments/assets/ef24a17a-7ffd-4a4d-bf6a-3633eb21fb75)
+now run the static timing analysis using the following command
+ ```
+sta pre_sta.config
+ ```
+![image](https://github.com/user-attachments/assets/cbee81c6-38d0-4b0c-8e3f-5d7c8bef5603)
+
+
+
+
 
 
 
