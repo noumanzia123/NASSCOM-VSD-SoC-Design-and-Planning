@@ -658,6 +658,8 @@ sta pre_sta.config
  ```
 ![image](https://github.com/user-attachments/assets/cbee81c6-38d0-4b0c-8e3f-5d7c8bef5603)
 
+When using ideal clocks for STA, the hold time is not important and therefore we loot at setup time only.
+
 
 
 
