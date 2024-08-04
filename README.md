@@ -612,6 +612,8 @@ echo $::env(SYNTH_DRIVING_CELL)
 
 Now run synthesis ```run_synthesis``` again and see if the delay is improved. From the new synthesis report, we noticed that slack was not changed so it was already optimized.
 ![image](https://github.com/user-attachments/assets/c577fc07-e0e8-4abe-998c-1e2f77014667)
+A total of **1434** instances of our vsdinverter are used. 
+
 
 ![image](https://github.com/user-attachments/assets/b0053411-e188-4f30-b4b2-dfff4669554b)
 
@@ -630,7 +632,7 @@ run_placement
 ![image](https://github.com/user-attachments/assets/565b9565-63a0-4b78-8d47-fcd0f74a13df)
 
 ![image](https://github.com/user-attachments/assets/df5e8a39-9375-4ac8-b390-8139932430da)
-
+We can also see the **worst slack and the total negative slack is 0**. Similarly, the **slack = data required time - data arrival time = 4.54**
 
 Now, to check whether the std cell we have created has been included in the design or not. Go to the following directory:
 ```
