@@ -246,7 +246,7 @@ From here we can see the switching variable **FP_IO_MODE = 1**, hence pins are r
 ```
 set ::env(FP_IO_MODE) 2
 ```
-Go to the following tab as shown below to run the command to change IO placer settings and run the floorplan again.
+Go to the tab below to run the command to change the IO placer settings and run the floorplan again.
 ![image](https://github.com/user-attachments/assets/ab53d829-9875-48b1-9bfb-3f0a7f210270)
 
  Now, we can check the change in the IO placer strategy: We can see that _.def_ file has been updated from the time stamps and date:
@@ -330,7 +330,7 @@ Now, to open the plot use ```plot y vs time a```  in the ngspice terminal
 
 ![image](https://github.com/user-attachments/assets/d9c38300-4f8a-4b99-b5c8-7b8678e98138)
 
-As we see the spikes are a bit larger at the edges of inverter output. 
+The spikes are a bit larger at the edges of inverter output. 
 We can increase the value of load capacitor (C3) in spice netlist to 2fF. 
 The results are shown below.
 ![image](https://github.com/user-attachments/assets/13ff72a8-e892-46b9-9e9e-ce49f5269608)
@@ -585,8 +585,8 @@ which is "0", therefore synthesis is already delay driven. There are some other 
 “SYNTH SIZING’ | Enables abc cell sizing (instead of buffering) <br> Enabled = 1, Disabled = © <br> (Default: ‘@°)|
 “SYNTH DRIVING CELL’ | The cell to drive the input ports. <br>(Defaul
 ```
-**SYNTH BUFFERING:** enables the buffers if the fan output is high and it is set to "1" for delay-driven synthesis.
-**SYNTH SIZING:** is upsizing or downsizing the buffers based on delay strategy and we set it "1" for delay-driven synthesis.
+**SYNTH BUFFERING:** enables the buffers if the fan output is high and it is set to "1" for delay-driven synthesis.<br/>
+**SYNTH SIZING:** is upsizing or downsizing the buffers based on delay strategy and we set it "1" for delay-driven synthesis.<br/>
 **SYNTH DRIVING CELL:** sets the std cell used to drive the input ports. If the input port has a lot of fan-outs then it needs more drive strength cell to drive the input.
 
 The image below shows that we first check and then set the variables as desired:
