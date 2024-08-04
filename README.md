@@ -579,7 +579,7 @@ we check **"SYNTH STRATEGY"** with following command:
 # check the current value
 echo $::env(SYNTH STRATEGY)
 ```
-which is "0", therefore synthesis is already delay driven. There are some other variables we can check
+which is "0", therefore synthesis is already delay-driven. There are some other variables we can check
 ```
 “SYNTH BUFFERING’ | Enables abc cell buffering <br> Enabled
 “SYNTH SIZING’ | Enables abc cell sizing (instead of buffering) <br> Enabled = 1, Disabled = © <br> (Default: ‘@°)|
@@ -587,10 +587,27 @@ which is "0", therefore synthesis is already delay driven. There are some other 
 ```
 **SYNTH BUFFERING:** enables the buffers if the fan output is high and it is set to "1" for delay-driven synthesis.<br/>
 **SYNTH SIZING:** is upsizing or downsizing the buffers based on delay strategy and we set it "1" for delay-driven synthesis.<br/>
-**SYNTH DRIVING CELL:** sets the std cell used to drive the input ports. If the input port has a lot of fan-outs then it needs more drive strength cell to drive the input.
-
-The image below shows that we first check and then set the variables as desired:
-![image](https://github.com/user-attachments/assets/a7ab94cf-6a75-43a0-886c-eca4bf8be6e9)
+**SYNTH DRIVING CELL:** sets the std cell used to drive the input ports. If the input port has a lot of fan-outs then it needs more drive-strength cells to drive the input.
+```
+# Now once again we have to prep the design to update the variables
+prep -design picorv32a -tag 26-07_10-33 -overwrite
+# Addiitional commands to include newly added lef to openlane flow merged.lef
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+# Command to display the current value of variable SYNTH_STRATEGY
+echo $::env(SYNTH_STRATEGY)
+# Command to set a new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+# Command to display the current value of variable SYNTH_BUFFERING to check whether it's enabled
+echo $::env(SYNTH_BUFFERING)
+# Command to display the current value of variable SYNTH_SIZING
+echo $::env(SYNTH_SIZING)
+# Command to set a new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+# Command to display the current value of variable SYNTH_DRIVING_CELL to check whether it's the proper cell or not
+echo $::env(SYNTH_DRIVING_CELL)
+# Now that the design is prepped and ready, we can run synthesis using the following command
+```
 
 Now run synthesis ```run_synthesis``` again and see if the delay is improved. From the new synthesis report, we noticed that slack was not changed so it was already optimized.
 
