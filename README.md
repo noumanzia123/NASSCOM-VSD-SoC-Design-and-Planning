@@ -770,7 +770,7 @@ set_propagated_clock [all_clocks]
 report_checks -path_delay min_max -format full_clock_expanded -digits 4
  ```
 
-The slack in the hold time is satisfied
+The figure below shows the buffers netlist used in the CTS. This also shows that slack in the hold time is satisfied.
 ![image](https://github.com/user-attachments/assets/5cc71ced-3182-4b54-baa3-002c657379c3)
 
 The slack in the setup time is satisfied
@@ -783,10 +783,48 @@ In routing actual metal layers are being laid. Therefore, the metals' capacitanc
 
 # Steps to execute OpenSTA with the right timing libraries and CTS assignment
 
-Netlist we got post-synthesis 
+First use ```exit ``` to exit from openroad. Now at openlane flow check the buffers used in the CTS netlist
+```
+echo $::env(CTS_CLK_BUFFER_LIST)
+```
+![image](https://github.com/user-attachments/assets/64b2ecea-0184-4e82-86f5-c444ab1ce044)
+Lets remove _sky130_fd_sc_hd__clkbuf_1 _ from the list:
+```
+set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
+```
+
+Now, to check we run the cts again 
+```
+run_cts
+```
+
+The cts fails or in hang and then we kill this task:
+```
+# find process ID
+top
+# kill process
+kill -9 1964
+```
+
+This is due to the reason that the current DEF value as we see below is incorrect. Becuase we have removed the buffer1, so we have to use the DEF value for placement,
+but after CTS the DEF value was changed to CTS DEF value. 
+![image](https://github.com/user-attachments/assets/35cd4ab3-8c45-40bb-a030-882fd349d390)
+set def as placement def
+```
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/12-07_11-26/results/placement/picorv32a.placement.def
+```
+![image](https://github.com/user-attachments/assets/33e6a034-0b53-4ce5-91fc-81a5640d7a8e)
+
 
 When openlane is building the CTS it tries to meet the skew value by inserting buffers from left to right and checks the skew value. The skew value is within the 10% of the clock period.
-If we remove anyof the clock buffers
+If we remove any of the clock buffers
+
+![image](https://github.com/user-attachments/assets/37c8b646-39be-4642-9fd0-50476ca1955e)
+
+![image](https://github.com/user-attachments/assets/b20fa22b-5b5d-4217-9885-82578f39159a)
+
+Now, We need to follow the similar steps that we have followed earlier in the openroad. go to openroad again and then:
+
 
 
 
