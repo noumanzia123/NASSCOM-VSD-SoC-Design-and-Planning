@@ -1,4 +1,4 @@
-# NASSCOM-VSD-SoC-Design-and-Planning
+![image](https://github.com/user-attachments/assets/d363a542-2d2c-4bbc-805a-c8c6219887b6)# NASSCOM-VSD-SoC-Design-and-Planning
 # Table of contents
 
 # THEORY 1: OPEN-SOURCE EDA, OPENLANE & SKY130 PDK
@@ -644,6 +644,7 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ```
 
 ![image](https://github.com/user-attachments/assets/d854c642-1f19-4774-93a9-262e3ef6d344)
+# Timing analysis with ideal clocks using openSTA
 
 ## Configure OpenSTA for post-synth timing analysis
 
@@ -651,14 +652,94 @@ Let's create an STA conf file (pre_sta.config) first in the directory ```/home/v
 ![image](https://github.com/user-attachments/assets/b887b477-9cfa-4341-976a-19fad4667c2b)
 
 my_base in the directory ```sky130_vsdinv.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src```
-![image](https://github.com/user-attachments/assets/ef24a17a-7ffd-4a4d-bf6a-3633eb21fb75)
+![image](https://github.com/user-attachments/assets/9337ea98-bb97-4dec-a083-1d75a2239f6a)
+
 now run the static timing analysis using the following command
  ```
 sta pre_sta.config
  ```
-![image](https://github.com/user-attachments/assets/cbee81c6-38d0-4b0c-8e3f-5d7c8bef5603)
+![image](https://github.com/user-attachments/assets/fc619288-6b0a-40fa-9c82-fe8d6b887f43)
+
+* **As we can see Slack is not equal to of what we got in the synthesis stage. So STA is unsuccessful. Therefore, we try to re-run the openlane flow using the following commands in sequence.**
+ ```
+# exit first from the openlane flow
+exit
+# start flow
+./flow.tcl -interactive
+# Now once again we have to prep the design to update the variables
+prep -design picorv32a -tag 26-07_10-33 -overwrite
+# Addiitional commands to include newly added lef to openlane flow merged.lef
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+# proceed with the Floorplan
+init_floorplan
+place_io
+tap_decap_or
+# placement
+run_placement
+ ```
+Note that we did not use the commands  ```set ::env(SYNTH_STRATEGY) "DELAY 3" and set ::env(SYNTH_SIZING) 1 ``` in the above flow.
+
+synthesis
+![image](https://github.com/user-attachments/assets/38093de7-0224-4cb7-b7e4-740330af5e62)
+
+placement
+![image](https://github.com/user-attachments/assets/0655eb2c-6863-4c0f-a88e-b21bcf0a8af8)
+
+now run the static timing analysis using the following command
+ ```
+sta pre_sta.config
+ ```
+
+![image](https://github.com/user-attachments/assets/734b0fa4-ddc4-4cbc-87ed-18ad4221d8d0)
+
+As we can see Slack is  equal to of what we got in the synthesis stage. So STA is successful.
 
 When using ideal clocks i.e. before clock tree synthesis, the hold time is not important and therefore we look at setup-time violations only (_**slack = data required time - data arrival time**_ ).
+
+# Clock tree synthesis TritonCTS and signal integrity
+
+## Steps to run CTS using TritonCTS
+
+TritonCTS is the EDA tool that generates the CTS. This tool so far generates the CTS for typical corner of std cells. Different CTS variables are listed in the _README.md_ file in the  ```...openlane/configuration directory ```
+![image](https://github.com/user-attachments/assets/2b1a940f-6143-48b6-b2f8-ea4581d9e6b2)
+
+
+![image](https://github.com/user-attachments/assets/33295672-fac3-4ac0-aac5-dac75f5c049a)
+
+
+In the cts stage the clock buffers get added, modifying the netlist. After completing the cts, we can observe that a new _.cts_ file has been added to the synthesis results directory. 
+The newly added CTS file contains both the previous netlist and the clock buffers added during the CTS stage.
+
+![image](https://github.com/user-attachments/assets/ae735f0d-6449-4346-8190-b0bf66157e92)
+
+Openroad is an EDA tool that performs floorplan to global routing. It takes the _.tcl_ files shown in the directory _openroad_ below:
+![image](https://github.com/user-attachments/assets/05d6d8e0-73f5-436f-ba45-969a60efd8a2)
+
+In the figure above _or_cts.tcl_ file has the CTS settings
+
+## Timing analysis with real clocks using openSTA
+
+Openroad has an OpenSTA integrated in it used for the STA. For timing analysis we create database  (from LEF and DEF file)
+ ```
+openroad
+ ```
+
+ ```
+read_lef /openLANE_flow/designs/picorv32a/runs/20-07_16-44/tmp/merged.lef
+ ```
+![image](https://github.com/user-attachments/assets/20a54325-00a6-40a9-8ed3-0658b468ce40)
+
+ ```
+read_def /openLANE_flow/designs/picorv32a/runs/20-07_16-44/results/cts/picorv32a.cts.def
+ ```
+![image](https://github.com/user-attachments/assets/2eb61839-c234-419f-8c9d-e1e475181a77)
+
+
+
+
+
+
 
 
 
