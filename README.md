@@ -722,27 +722,38 @@ In the figure above _or_cts.tcl_ file has the CTS settings
 
 ## Timing analysis with real clocks using openSTA
 
-Openroad has an OpenSTA integrated in it used for the STA. For timing analysis we create database  (from LEF and DEF file)
+Openroad has an OpenSTA integrated in it used for the STA. 
  ```
 openroad
  ```
+For timing analysis in openroad, we  first create the database (created from lef and def files). Run the follwoing commands:
 
  ```
-read_lef /openLANE_flow/designs/picorv32a/runs/20-07_16-44/tmp/merged.lef
+read_lef /openLANE_flow/designs/picorv32a/runs/26-07_10-33/tmp/merged.lef
  ```
 ![image](https://github.com/user-attachments/assets/20a54325-00a6-40a9-8ed3-0658b468ce40)
 
  ```
-read_def /openLANE_flow/designs/picorv32a/runs/20-07_16-44/results/cts/picorv32a.cts.def
+read_def /openLANE_flow/designs/picorv32a/runs/26-07_10-33/results/cts/picorv32a.cts.def
  ```
 ![image](https://github.com/user-attachments/assets/2eb61839-c234-419f-8c9d-e1e475181a77)
-
-
+ ```
+write_db pico_cts.db
+ ```
 ![image](https://github.com/user-attachments/assets/425824b5-9249-4351-8f55-6eb1bec27248)
+ ```
+read_db pico_cts.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/26-07_10-33/results/synthesis/picorv32a.synthesis_cts.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+report_checks -path_delay min_max -format full_clock_expanded -digits 4
+ ```
 
+The slack in the hold time is satisfied
+![image](https://github.com/user-attachments/assets/5cc71ced-3182-4b54-baa3-002c657379c3)
 
-![image](https://github.com/user-attachments/assets/e52152da-e22b-4a9e-b256-3f3551303bc8)
-
+The slack in the setup time is satisfied
 ![image](https://github.com/user-attachments/assets/7dcf5938-e4e6-4839-80b2-901a050354b6)
 
 
