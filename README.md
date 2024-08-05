@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/d363a542-2d2c-4bbc-805a-c8c6219887b6)# NASSCOM-VSD-SoC-Design-and-Planning
+# NASSCOM-VSD-SoC-Design-and-Planning
 # Table of contents
 
 # THEORY 1: OPEN-SOURCE EDA, OPENLANE & SKY130 PDK
@@ -704,6 +704,8 @@ When using ideal clocks i.e. before clock tree synthesis, the hold time is not i
 ## Steps to run CTS using TritonCTS
 
 TritonCTS is the EDA tool that generates the CTS. This tool so far generates the CTS for typical corner of std cells. Different CTS variables are listed in the _README.md_ file in the  ```...openlane/configuration directory ```
+![image](https://github.com/user-attachments/assets/d363a542-2d2c-4bbc-805a-c8c6219887b6)
+
 ![image](https://github.com/user-attachments/assets/2b1a940f-6143-48b6-b2f8-ea4581d9e6b2)
 
 
