@@ -8,10 +8,12 @@
 ## Different files in workflow?
 * **Library Exchange Format (LEF) file**: Place and route (PnR) does not need information about the logic or complete layout.
 It just needs the pin positions and boundary information. This minimal and abstract information is provided to the tool by the LEF file.
-LEF file also serves the purpose of protecting intellectual property. LEF file contains the metal layers and pin locations. the difference between layout and LEF file is shown below:
+LEF file also serves the purpose of protecting intellectual property. LEF file contains the metal layers and pin locations. the difference between the layout and the LEF file is shown below:
+
 ![image](https://github.com/user-attachments/assets/4b9826d9-31d5-4588-9c4e-7651f074ffa8)
 
-
+* **Design Exchange Format (DEF) file**: DEF represents the complete physical layout of an integrated circuit. LEF is more metal-specific whereas DEF is placement-specific. DEF could contains netlist, routing, placement, scan info, port... 
+  
 # LAB 1: OPEN-SOURCE EDA, OPENLANE & SKY130 PDK
 Characterization of Synthesized Results
 ## Directory structure in openlane
@@ -734,6 +736,18 @@ read_lef /openLANE_flow/designs/picorv32a/runs/20-07_16-44/tmp/merged.lef
 read_def /openLANE_flow/designs/picorv32a/runs/20-07_16-44/results/cts/picorv32a.cts.def
  ```
 ![image](https://github.com/user-attachments/assets/2eb61839-c234-419f-8c9d-e1e475181a77)
+
+
+![image](https://github.com/user-attachments/assets/425824b5-9249-4351-8f55-6eb1bec27248)
+
+
+![image](https://github.com/user-attachments/assets/e52152da-e22b-4a9e-b256-3f3551303bc8)
+
+![image](https://github.com/user-attachments/assets/7dcf5938-e4e6-4839-80b2-901a050354b6)
+
+
+
+In routing actual metal layers are being laid. Therefore, the metals' capacitance and resistance are also included and hence the arrival time will increase so we can decrease the slack for hold time but it will degrade for setup time. 
 
 
 
