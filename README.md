@@ -705,12 +705,30 @@ When using ideal clocks i.e. before clock tree synthesis, the hold time is not i
 
 TritonCTS is the EDA tool that generates the CTS. This tool so far generates the CTS for typical corner of std cells. Different CTS variables are listed in the _README.md_ file in the  ```...openlane/configuration directory ```
 ![image](https://github.com/user-attachments/assets/d363a542-2d2c-4bbc-805a-c8c6219887b6)
-
-![image](https://github.com/user-attachments/assets/2b1a940f-6143-48b6-b2f8-ea4581d9e6b2)
-
-
+ ```
+write_verilog //path of the previous design//
+#In our case:
+write_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/20-07_16-44/results/synthesis/picorv32a.synthesis.v
+ ```
 ![image](https://github.com/user-attachments/assets/33295672-fac3-4ac0-aac5-dac75f5c049a)
+This will replace the old design with the optimized one. Once the update is complete, proceed with the Floorplan stage using the same commands as before.
+ ```
+init_floorplan
+place_io
+tap_decap_or
+ ```
+After successful completion of the Floorplan, we proceed to the placement step by using the commands:
+run_placement
 
+![image](https://github.com/user-attachments/assets/d2a36538-b972-48c5-9b8c-13a922f2601c)
+![image](https://github.com/user-attachments/assets/8e0ddd5d-3160-4715-b52e-7d40ad57dd08)
+
+
+ ```
+run_cts
+ ```
+
+![image](https://github.com/user-attachments/assets/1e1672eb-65ab-4efe-94e3-b20cb329a17a)
 
 In the cts stage the clock buffers get added, modifying the netlist. After completing the cts, we can observe that a new _.cts_ file has been added to the synthesis results directory. 
 The newly added CTS file contains both the previous netlist and the clock buffers added during the CTS stage.
