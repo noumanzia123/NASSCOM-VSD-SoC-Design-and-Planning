@@ -838,9 +838,35 @@ set_propagated_clock [all_clocks]
 report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
 ```
 
-hold time
+hold time is improved from 0.0772 to 0.2456
 ![image](https://github.com/user-attachments/assets/16b7b7bb-86a3-4309-a08d-2c0d935fd6c8)
 
-setup time
+setup time remained the same as 14.1462
 ![image](https://github.com/user-attachments/assets/37d76bf8-94a4-4bff-925c-22f8fc4b8a01)
+```
+report_clock_skew -hold
+```
+![image](https://github.com/user-attachments/assets/acc0b711-e462-4389-8eb3-b8aa66c20f38)
+```
+report_clock_skew -setup
+```
+![image](https://github.com/user-attachments/assets/6c7eb278-ea78-489e-8e2f-3534194ac419)
+
+The skew for both setup and hold time is 0.51 which is less than 10% of clock period.
+
+Now if we want to include buf_1 again:
+
+```Exit``` the openroad first. To check the current value of clock buffers list
+```
+echo $::env(CTS_CLK_BUFFER_LIST)
+```
+![image](https://github.com/user-attachments/assets/f3233413-fa52-453a-b326-7372520c42d9)
+
+To insert sky130_fd_sc_hd__clkbuf_1 from the list
+```
+set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_sc_hd__clkbuf_1]
+```
+![image](https://github.com/user-attachments/assets/385289dc-95cc-4da9-a5ff-3745fc1326ee)
+
+![image](https://github.com/user-attachments/assets/d2151dce-74da-481e-8440-30dc6408ad44)
 
