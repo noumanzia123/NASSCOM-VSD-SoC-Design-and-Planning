@@ -781,14 +781,12 @@ The slack in the setup time is satisfied
 In routing actual metal layers are being laid. Therefore, the metals' capacitance and resistance are also included and hence the arrival time will increase so we can decrease the slack for hold time but it will degrade for setup time. 
 
 
+# Steps to execute OpenSTA with the right timing libraries and CTS assignment
 
+Netlist we got post-synthesis 
 
-
-
-
-
-
-
+When openlane is building the CTS it tries to meet the skew value by inserting buffers from left to right and checks the skew value. The skew value is within the 10% of the clock period.
+If we remove anyof the clock buffers
 
 
 
