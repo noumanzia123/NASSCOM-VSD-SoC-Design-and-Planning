@@ -798,9 +798,9 @@ Now, to check we run the cts again
 run_cts
 ```
 
-The cts fails or in hang and then we kill this task:
+The cts fails or hangs and then we kill this task:
 ```
-# find process ID
+# find the process ID
 top
 # kill process
 kill -9 1964
@@ -825,7 +825,22 @@ If we remove any of the clock buffers
 
 Now, We need to follow the similar steps that we have followed earlier in the openroad. go to openroad again and then:
 
+```
+read_lef /openLANE_flow/designs/picorv32a/runs/26-07_10-33/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/26-07_10-33/results/cts/picorv32a.cts.def
+write_db pico_cts1.db
+read_db pico_cts1.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/26-07_10-33/results/synthesis/picorv32a.synthesis_cts.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock [all_clocks]
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+```
 
+hold time
+![image](https://github.com/user-attachments/assets/16b7b7bb-86a3-4309-a08d-2c0d935fd6c8)
 
-
+setup time
+![image](https://github.com/user-attachments/assets/37d76bf8-94a4-4bff-925c-22f8fc4b8a01)
 
