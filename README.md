@@ -10,7 +10,7 @@
 It just needs the pin positions and boundary information. This minimal and abstract information is provided to the tool by the LEF file.
 LEF file also serves the purpose of protecting intellectual property. LEF file contains the metal layers and pin locations. the difference between the layout and the LEF file is shown below:
 
-![image](https://github.com/user-attachments/assets/4b9826d9-31d5-4588-9c4e-7651f074ffa8)
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/4b9826d9-31d5-4588-9c4e-7651f074ffa8">
 
 * **Design Exchange Format (DEF) file**: DEF represents the complete physical layout of an integrated circuit. LEF is more metal-specific whereas DEF is placement-specific. DEF could contains netlist, routing, placement, scan info, port... 
   
