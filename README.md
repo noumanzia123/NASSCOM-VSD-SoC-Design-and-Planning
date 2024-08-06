@@ -928,11 +928,17 @@ run_routing
 ![image](https://github.com/user-attachments/assets/096e85e0-1996-4b29-8f2a-133d3bd2a163)
 
 **The routing has been completed with zero violations and no slack. Hence, routing is successful.** <br/> 
-To view the routing results go to the routing directory of picorv32a results:
+To view the routing results inclduing the Parsitic Extraction file _.spef_ go to the routing directory of picorv32a results:
 ```
 /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/routing
 ```
 ![image](https://github.com/user-attachments/assets/a0405556-d098-49ff-9bf2-979dac2b305b)
+
+Also netlist files updated some stages can be seen below:
+
+![image](https://github.com/user-attachments/assets/3232e24f-9ae2-4e56-bfa2-60fc4d437ddf)
+First file is netlist after first synthesis, third file is the netlist updated after CTS and fourth netlist is generated before routing. The final netlist used for routing was .preroute.v
+
 
 To view the final layout, use the following command:
 
