@@ -870,3 +870,17 @@ set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_
 
 ![image](https://github.com/user-attachments/assets/d2151dce-74da-481e-8440-30dc6408ad44)
 
+# LAB 5: FINAL STEPS FOR RTL2GDS USING TRITONROUTE & OPENSTA
+
+## Steps to build a power distribution network
+
+A power distribution network (PDN) is generated before routing. PDN is done after CTS
+
+PDN writes the LEF file, reads the CTS DEF, and creates the grid and straps for the power and ground. As we know STDcells are placed in the std rows, therefore STDcell power rails are placed along the stdcell rows. The stdcell rails have a
+pitch of 2.720 which is equivalent to the height of the stdcell inverter. Thus the power and ground stdcell rails match with the GND and PWR ports of stdcell inverter.
+
+The diagram below shows power planning. Green is the picorv32a design area, yellow are IO pads, square pads are corner pads, while red, and blue are power and ground pads. 
+From the pads, power is supplied to the rectangular close-loop rings. From these rings the connection with the stdcells rails is made through vertical power stripe 
+![image](https://github.com/user-attachments/assets/647fa47a-14af-49ac-b0ab-476a05bb59fe)
+
+
