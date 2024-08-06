@@ -177,9 +177,9 @@ Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it ve
 Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it vertically to the middle of the screen.
 
 <img width="490" alt="image" src="https://github.com/user-attachments/assets/655325c8-1702-4494-aea1-c850d8c8f513">
-
-<img width="470" alt="image" src="https://github.com/user-attachments/assets/836df4d9-8545-43c3-937d-cf45b3b49d24">
-
+<br/> 
+<img width="490" alt="image" src="https://github.com/user-attachments/assets/836df4d9-8545-43c3-937d-cf45b3b49d24">
+<br/> 
 <img width="525" alt="image" src="https://github.com/user-attachments/assets/76ec4a65-69ba-4592-93b8-6dd1c1fd5bb7">
 
 
