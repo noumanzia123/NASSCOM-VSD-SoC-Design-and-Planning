@@ -873,14 +873,38 @@ set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_
 # LAB 5: FINAL STEPS FOR RTL2GDS USING TRITONROUTE & OPENSTA
 
 ## Steps to build a power distribution network
+Once CTS is ready we can generate a power distribution network (PDN) before routing.
+Let's check our current DEF file, using the following commands:
+```
+echo $::env(CURRENT_DEF)
+```
+which should be a CTS DEF file (picorv32a.cts.def)
+![image](https://github.com/user-attachments/assets/5966a8c6-9b7a-403c-a3c3-2631bdcaa5fe)
+use the following commands for PDN
+```
+gen_pdn
+```
+![image](https://github.com/user-attachments/assets/3e4593d9-80f3-44c8-ae84-6dea0f3150c4)
 
-A power distribution network (PDN) is generated before routing. PDN is done after CTS
-
-PDN writes the LEF file, reads the CTS DEF, and creates the grid and straps for the power and ground. As we know STDcells are placed in the std rows, therefore STDcell power rails are placed along the stdcell rows. The stdcell rails have a
+The PDN output above shows that PDN writes the LEF file, reads the CTS DEF and creates the grid and straps for the power and ground. As we know STDcells are placed in the std rows, therefore STDcell power rails are placed along the stdcell rows. The stdcell rails have a
 pitch of 2.720 which is equivalent to the height of the stdcell inverter. Thus the power and ground stdcell rails match with the GND and PWR ports of stdcell inverter.
 
-The diagram below shows power planning. Green is the picorv32a design area, yellow are IO pads, square pads are corner pads, while red, and blue are power and ground pads. 
-From the pads, power is supplied to the rectangular close-loop rings. From these rings the connection with the stdcells rails is made through vertical power stripe 
+The diagram below shows power planning. 
 ![image](https://github.com/user-attachments/assets/647fa47a-14af-49ac-b0ab-476a05bb59fe)
+In the figure above, the green area corresponds to the picorv32a design. The red pads are for power, while the blue pads provide the ground connection.
+
+From the pads, power is supplied to the rectangular close-loop rings. The vertical lines connected to the rings are power straps. The stdcells power and ground rails are connected to vertical straps. 
+The height of the std cells must be multiple of the rail pitch to ensure proper power and ground connection. This image shows how the power comes from the outside to the pads, pads to the rings, rings to strap/stripe, and strap/stripe to stdcell rows.
+
+##  Global and detail routing and configure TritonRoute
+In summary, we have done the following openlane flow steps so far: 1) the design setup using -prep commands, 2) the floorplan, 3) placement of stdcells, 4) clock tree synthesis, and 5)  power distribution network generation.
+Now the next step is Routing. 
+We first check the current DEF file:
+![image](https://github.com/user-attachments/assets/b94f1082-6735-4ce1-907d-d33c8d024dc0)
+
+TritonRoute is the engine used for Routing.
+Now DEF file is the floorplan's PDN DEF. This DEF file has both the CTS DEF and PDN. Before routing let's check the routing variables from the directory ```/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration```
+![image](https://github.com/user-attachments/assets/d731b96d-3647-408e-a83a-9c0d082551fb)
+
 
 
