@@ -897,14 +897,24 @@ From the pads, power is supplied to the rectangular close-loop rings. The vertic
 The height of the std cells must be multiple of the rail pitch to ensure proper power and ground connection. This image shows how the power comes from the outside to the pads, pads to the rings, rings to strap/stripe, and strap/stripe to stdcell rows.
 
 ##  Global and detail routing and configure TritonRoute
-In summary, we have done the following openlane flow steps so far: 1) the design setup using -prep commands, 2) the floorplan, 3) placement of stdcells, 4) clock tree synthesis, and 5)  power distribution network generation.
-Now the next step is Routing. 
-We first check the current DEF file:
-![image](https://github.com/user-attachments/assets/b94f1082-6735-4ce1-907d-d33c8d024dc0)
+Now the last stage in the design flow is Routing. In summary, we have done the following openlane flow steps so far: 1) the design setup using -prep commands, 2) the floorplan, 3) placement of stdcells, 4) clock tree synthesis, and 
+5) power distribution network generation. TritonRoute is the engine used for Routing. The routing is divided into GLOBAL ROUTING and DETAIL ROUTING.  GLOBAL ROUTING is done by the FAST ROUTE, while DETAIL ROUTING is done by TritonRoute. This is shown below.
+![image](https://github.com/user-attachments/assets/4d19f35c-18e9-4d3f-8a1f-57ae858be165)
 
-TritonRoute is the engine used for Routing.
-Now DEF file is the floorplan's PDN DEF. This DEF file has both the CTS DEF and PDN. Before routing let's check the routing variables from the directory ```/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration```
+Before routing, first check the current DEF file:
+![image](https://github.com/user-attachments/assets/b94f1082-6735-4ce1-907d-d33c8d024dc0)
+The figure above shows that the DEF file is the floorplan's PDN DEF. This DEF file has both the CTS DEF and PDN. Before routing let's check the routing variables from the directory
+```/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/configuration```
 ![image](https://github.com/user-attachments/assets/d731b96d-3647-408e-a83a-9c0d082551fb)
+Run the following command for routing:
+```
+run_routing
+```
+![image](https://github.com/user-attachments/assets/44222aa0-6c53-4d7c-b36c-0a2368b4521a)
+![image](https://github.com/user-attachments/assets/096e85e0-1996-4b29-8f2a-133d3bd2a163)
+
+The routing has been completed with zero violations and no slack. Hence, routing is successful.
+
 
 
 
