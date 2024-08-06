@@ -164,7 +164,7 @@ These results are useful. For example: we can see the die area :
 
 1µm = 1000 data base units and therefore the area is (0 0) (660.6µm 671.4µm)
 
-Now, to open this ".def" file in magic , use the following command:
+Now, to open this ".def" file in magic, use the following command:
 ```
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def
 ```
@@ -662,7 +662,10 @@ sta pre_sta.config
  ```
 ![image](https://github.com/user-attachments/assets/fc619288-6b0a-40fa-9c82-fe8d6b887f43)
 
-* **As we can see Slack is not equal to of what we got in the synthesis stage. So STA is unsuccessful. Therefore, we try to re-run the openlane flow using the following commands in sequence.**
+* **As we can see Slack is not equal to what we got in the synthesis stage. However, we proceed with the CTS and routing**
+  
+ <!-- Therefore, we try to re-run the openlane flow using the following commands in sequence.
+
  ```
 # exit first from the openlane flow
 exit
@@ -695,7 +698,10 @@ sta pre_sta.config
 
 ![image](https://github.com/user-attachments/assets/734b0fa4-ddc4-4cbc-87ed-18ad4221d8d0)
 
-As we can see Slack is  equal to of what we got in the synthesis stage. So STA is successful.
+As we can see Slack is equal to what we got in the synthesis stage. So STA is successful.
+-->
+<!-- a normal html comment -->
+
 
 When using ideal clocks i.e. before clock tree synthesis, the hold time is not important and therefore we look at setup-time violations only (_**slack = data required time - data arrival time**_ ).
 
@@ -887,18 +893,19 @@ gen_pdn
 ![image](https://github.com/user-attachments/assets/3e4593d9-80f3-44c8-ae84-6dea0f3150c4)
 
 The PDN output above shows that PDN writes the LEF file, reads the CTS DEF and creates the grid and straps for the power and ground. As we know STDcells are placed in the std rows, therefore STDcell power rails are placed along the stdcell rows. The stdcell rails have a
-pitch of 2.720 which is equivalent to the height of the stdcell inverter. Thus the power and ground stdcell rails match with the GND and PWR ports of stdcell inverter.
+pitch of 2.720, equivalent to the height of the stdcell inverter. Thus the power and ground stdcell rails match with the GND and PWR ports of stdcell inverter.
 
 The diagram below shows power planning. 
 ![image](https://github.com/user-attachments/assets/647fa47a-14af-49ac-b0ab-476a05bb59fe)
 In the figure above, the green area corresponds to the picorv32a design. The red pads are for power, while the blue pads provide the ground connection.
 
-From the pads, power is supplied to the rectangular close-loop rings. The vertical lines connected to the rings are power straps. The stdcells power and ground rails are connected to vertical straps. 
+From the pads, power is supplied to the rectangular close-loop rings. The vertical lines connected to the rings are power straps. The stdcells power and ground rails are attached to vertical straps. 
 The height of the std cells must be multiple of the rail pitch to ensure proper power and ground connection. This image shows how the power comes from the outside to the pads, pads to the rings, rings to strap/stripe, and strap/stripe to stdcell rows.
 
 ##  Global and detail routing and configure TritonRoute
 Now the last stage in the design flow is Routing. In summary, we have done the following openlane flow steps so far: 1) the design setup using -prep commands, 2) the floorplan, 3) placement of stdcells, 4) clock tree synthesis, and 
-5) power distribution network generation. TritonRoute is the engine used for Routing. The routing is divided into GLOBAL ROUTING and DETAIL ROUTING.  GLOBAL ROUTING is done by the FAST ROUTE, while DETAIL ROUTING is done by TritonRoute. This is shown below.
+5) power distribution network generation. <br/> 
+TritonRoute is the engine used for Routing. The routing is divided into GLOBAL ROUTING and DETAIL ROUTING.  The FAST ROUTE does GLOBAL ROUTING, while TritonRoute does DETAIL ROUTING. This is shown below.
 ![image](https://github.com/user-attachments/assets/4d19f35c-18e9-4d3f-8a1f-57ae858be165)
 
 Before routing, first check the current DEF file:
@@ -910,10 +917,43 @@ Run the following command for routing:
 ```
 run_routing
 ```
+**Inputs:** to TritonRoute are the LEF file, DEF file, and preprocessed route guides from FAST ROUTE. 
+**Outputs:** are detailed routing with optimized wire-length and via count. 
+**Constraints:** Route guides, connectivity constraints and design rules
+
 ![image](https://github.com/user-attachments/assets/44222aa0-6c53-4d7c-b36c-0a2368b4521a)
 ![image](https://github.com/user-attachments/assets/096e85e0-1996-4b29-8f2a-133d3bd2a163)
 
-The routing has been completed with zero violations and no slack. Hence, routing is successful.
+**The routing has been completed with zero violations and no slack. Hence, routing is successful.** <br/> 
+To view the routing results go to the routing directory of picorv32a results:
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/26-07_10-33/routing
+```
+![image](https://github.com/user-attachments/assets/a0405556-d098-49ff-9bf2-979dac2b305b)
+
+To view the final layout, use the following command:
+
+```
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.def
+```
+![image](https://github.com/user-attachments/assets/0fd3d5f8-a9b7-40a2-8f30-75183d6de498)
+
+![image](https://github.com/user-attachments/assets/c34ef8b2-edf9-47e9-92e3-b513abe2ab3f)
+
+![image](https://github.com/user-attachments/assets/35f6fcef-1b52-4793-8807-7ce7d2f60efa)
+
+The custom inverter was successfully included in the _picorv32a_ design. Below is the final zoomed routed layout of the picorv32a design with the custom cell highlighted.
+
+![image](https://github.com/user-attachments/assets/be26e952-8957-4721-b041-d9f1f0f0801c)
+
+
+# REFERENCES
+
+* [VSD Standard Cell Design](https://github.com/nickson-jose/vsdstdcelldesign)
+* [Google Skywater PDK](https://skywater-pdk.readthedocs.io/en/main/index.html)
+* [Materials provided in the NASSCOM VSD SoC Design Program]
+# AUTHOR
+[Nouman Zia](https://github.com/noumanzia123)
 
 
 
