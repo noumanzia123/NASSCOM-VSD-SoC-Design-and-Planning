@@ -955,6 +955,8 @@ The custom inverter was successfully included in the _picorv32a_ design. Below i
 
 ![image](https://github.com/user-attachments/assets/be26e952-8957-4721-b041-d9f1f0f0801c)
 
+The RTL to GDS flow is iterative process, where synthesis is repeated several times to optimize the design.
+
 
 # REFERENCES
 
