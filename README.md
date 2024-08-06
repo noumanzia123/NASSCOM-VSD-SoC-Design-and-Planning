@@ -176,9 +176,9 @@ Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it ve
 Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it vertically to the middle of the screen.
 Seconds | 1. Press S to select the entire design.<br/> 2. Press V to align it vertically to the middle of the screen.
 
-<img width="490" alt="image" src="https://github.com/user-attachments/assets/655325c8-1702-4494-aea1-c850d8c8f513">
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/655325c8-1702-4494-aea1-c850d8c8f513">
 <br/> 
-<img width="490" alt="image" src="https://github.com/user-attachments/assets/836df4d9-8545-43c3-937d-cf45b3b49d24">
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/836df4d9-8545-43c3-937d-cf45b3b49d24">
 <br/> 
 <img width="525" alt="image" src="https://github.com/user-attachments/assets/76ec4a65-69ba-4592-93b8-6dd1c1fd5bb7">
 
@@ -216,7 +216,7 @@ And then we can see 'picorv32a.placement.def' file. To open it using MAGIC use t
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def
 ```
 
-![image](https://github.com/user-attachments/assets/0b680081-0bfa-4fcf-97f4-df6021a3aa33)
+<img width="635" alt="image" src="https://github.com/user-attachments/assets/0b680081-0bfa-4fcf-97f4-df6021a3aa33">
 
 <img width="635" alt="image" src="https://github.com/user-attachments/assets/d8abc2cd-e549-43ca-ba6c-d203ff721da8">
 
@@ -235,7 +235,8 @@ Then use the command to open the '.def' file in magic:
  magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def
 ```
 
-![image](https://github.com/user-attachments/assets/1807d4f2-b6f0-487d-ac58-3ceb942f87b6)
+<img width="635" alt="image" src="https://github.com/user-attachments/assets/1807d4f2-b6f0-487d-ac58-3ceb942f87b6">
+
 As we can see pins are randomly equidistant. There are four strategies supported by IO placer (Open source EDA tool). 
 Now, if want it to change to some other IO pins strategy, first go to the following directory and open _floorplan.tcl_ file:
 ```
@@ -257,7 +258,7 @@ Go to the tab below to run the command to change the IO placer settings and run 
 
  Now, let us open it in magic using the earlier used command and we see that IO pin configuration is changed
 
-![image](https://github.com/user-attachments/assets/6f83ebd8-84ea-478d-91cf-84d7bb20c128)
+<img width="635" alt="image" src="https://github.com/user-attachments/assets/6f83ebd8-84ea-478d-91cf-84d7bb20c128">
 
 
 ## Steps to get clone of git "vsdstdcelldesign" repo
@@ -814,10 +815,12 @@ kill -9 1964
 
 This is due to the reason that the current DEF value as we see below is incorrect. Becuase we have removed the buffer1, so we have to use the DEF value for placement,
 but after CTS the DEF value was changed to CTS DEF value. 
-![image](https://github.com/user-attachments/assets/35cd4ab3-8c45-40bb-a030-882fd349d390)
+![image](https://github.com/user-attachments/assets/35cd4ab3-8c45-40bb-a030-882fd349d390) <br/> 
+
 set def as placement def
+
 ```
-set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/12-07_11-26/results/placement/picorv32a.placement.def
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/26-07_10-33/results/placement/picorv32a.placement.def
 ```
 ![image](https://github.com/user-attachments/assets/33e6a034-0b53-4ce5-91fc-81a5640d7a8e)
 
