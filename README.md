@@ -14,10 +14,17 @@ Finally, the design is exported as a GDSII file, which is used by semiconductor 
 
 ![image](https://github.com/user-attachments/assets/2091ddf7-e211-408a-9cc8-ffef69762a18)
 
+## Introduction to Openlane flow
+OpenLANE is a completely automated RTL to GDSII design flow that includes open-source tools and custom scripts for design optimization. Openlane is built around Skywater 130nm process node
+and is capable of performing full ASIC implementation steps from RTL down to GDSII. The flow-chart below gives a complete openlane design flow from RTL to GDSII.
+![image](https://github.com/user-attachments/assets/503414c9-f122-41d9-a178-b9063fdfde19)
+
+
+## Overview of Physical Design flow 
 **Floorplanning:** During this step some major decisions are taken like how to partition the system into the subsystems and blocks, how to arrange the blocks on the chip, where to allocate the stdcells, macros, memory, etc. 
-During floorplanning the IO cell and power planning takes place.
-**Placement:** Placement steps decide the location of stdcells in the design. In this step, the wire length is estimated and therefore placement takes place considering the estimated wire lengths.
-**Clock-tree synthesis (CTS):** In this step clock tree netlist is implemented  including the buffers. In this step wiring of clock cetwork is performed. The objective of this step is to minimize the skew and minimize power dissipation.
+During floorplanning the IO cell and power planning takes place. <br/> 
+**Placement:** Placement steps decide the location of stdcells in the design. In this step, the wire length is estimated and therefore placement takes place considering the estimated wire lengths. <br/> 
+**Clock-tree synthesis (CTS):** In this step clock tree netlist is implemented, which includes buffers and the wiring of the clock network is performed. The objective of this step is to minimize the skew and minimize power dissipation. <br/> 
 **Routing (Global and Detailed):** Routing creates the wiring layout for all nets other than the clock and power supply. The routing is divided into GLOBAL ROUTING and DETAILED ROUTING. Global routing is the
 planning stage, where a routing plan for a given net is created by dividing the entire routing region into rectangular tiles or bins. The detailed router decides the actual routing of each pre-assigned globals bins,
 where the actual wires and vias are created.
