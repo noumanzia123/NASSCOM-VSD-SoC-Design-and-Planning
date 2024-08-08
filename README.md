@@ -5,6 +5,23 @@
 
 ## What is an RTL to GDSII flow?
 
+Register Transfer Language (RTL) to Graphic Data System II (GDSII) is a comprehensive design flow in integrated circuit (IC) development that transforms a high-level hardware description into a physical layout ready for fabrication in the foundry. 
+The RTL to GDSII process flows through several steps starting from the RTL design, where the circuit's functionality is coded into the hardware description languages using Verilog or VHDL. 
+This RTL code is then converted into a gate-level netlist through a process called synthesis. Once the netlist is created, the first step in the physical design process is floorplanning followed by placement,
+clock-tree synthesis (CTS), and routing. After placement and routing, signoff checks including Design Rule Checking (DRC), Layout Versus Schematic (LVS) checks, and Static Timing Analysis (STA) are performed.
+The whole process is iterative until power, performance, and area targets are not met. 
+Finally, the design is exported as a GDSII file, which is used by semiconductor foundries to fabricate the physical ICs from the GDSII layout. A simplified RTL to GDSII process flow is shown below:
+
+![image](https://github.com/user-attachments/assets/2091ddf7-e211-408a-9cc8-ffef69762a18)
+
+**Floorplanning:** During this step some major decisions are taken like how to partition the system into the subsystems and blocks, how to arrange the blocks on the chip, where to allocate the stdcells, macros, memory, etc. 
+During floorplanning the IO cell and power planning takes place.
+**Placement:** Placement steps decide the location of stdcells in the design. In this step, the wire length is estimated and therefore placement takes place considering the estimated wire lengths.
+**Clock-tree synthesis (CTS):** In this step clock tree netlist is implemented  including the buffers. In this step wiring of clock cetwork is performed. The objective of this step is to minimize the skew and minimize power dissipation.
+**Routing (Global and Detailed):** Routing creates the wiring layout for all nets other than the clock and power supply. The routing is divided into GLOBAL ROUTING and DETAILED ROUTING. Global routing is the
+planning stage, where a routing plan for a given net is created by dividing the entire routing region into rectangular tiles or bins. The detailed router decides the actual routing of each pre-assigned globals bins,
+where the actual wires and vias are created.
+
 ## Different files in workflow?
 * **Library Exchange Format (LEF) file**: Place and route (PnR) does not need information about the logic or complete layout.
 It just needs the pin positions and boundary information. This minimal and abstract information is provided to the tool by the LEF file.
