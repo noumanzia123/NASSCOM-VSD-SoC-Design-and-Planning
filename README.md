@@ -23,7 +23,8 @@ and is capable of performing full ASIC implementation steps from RTL down to GDS
 ## Overview of Physical Design flow 
 In ASIC design flow, PnR is the core which consists of several steps. Below are the stages and the respective tools used by OpenLANE:
 
-* **Synthesis:** Generates gate-level netlist, performs cell mapping and pre-layout STA. Input: RTL design, Library (standard cells and macros), constraints (design goals, expected timing behavior, environment)
+* **Synthesis:** Generates gate-level netlist, performs cell mapping, and pre-layout STA. <br/> 
+Input: RTL design, Library (standard cells and macros), constraints (design goals, expected timing behavior, environment)
 * **Floorplanning:** During this step some major decisions are taken like how to partition the system into the subsystems and blocks, how to arrange the blocks on the chip, where to allocate the stdcells, macros, memory, etc. 
 During floorplanning the IO cell and power planning takes place. <br/> 
 * **Placement:** Placement steps decide the location of stdcells in the design. In this step, the wire length is estimated and therefore placement takes place considering the estimated wire lengths. <br/> 
@@ -41,13 +42,60 @@ LEF file also serves the purpose of protecting intellectual property. LEF file c
 
 * **Design Exchange Format (DEF) file**: DEF represents the complete physical layout of an integrated circuit. LEF is more metal-specific whereas DEF is placement-specific. DEF could contains netlist, routing, placement, scan info, port... 
   
-# LAB 1: OPEN-SOURCE EDA, OPENLANE & SKY130 PDK
+# LAB 1: GETTING FAMILIAR WITH OPENLANE EDA TOOLS
 Characterization of Synthesized Results
-## Directory structure in openlane
+
+* Useful LINUX Commands
+** ls : lists the directory contents
+** ls -ltr : lists the directory contents in long format, sorted by modification time in reverse order (oldest first).
+** ls --help: displays a help message for the "ls" command.
+** clear: clears the terminal screen.
+** less "filename": opens the file to view
+** vim "filename": opens the file to edit. Press "i" to edit, press Esc, then ":wq" to save and exit, "q!" exit without save
+** touch "filename": creates a new file
+Now, we go to the work directory where all files related to the workshop are stored
 
 ## Design Preparation Step
+To enter into bash while being in the _openalne_ directory use the command:
+```
+docker
+```
+for the step-by-step openlane flow execution enter the following command
+```
+./flow.tcl -interactive
+```
+Now, we are in the OPENLANE. To input the required packages, use the following command:
+```
+% package require openlane 0.9
+```
+As there are various pre-built designs in the _designs_ subdirectory, we are choosing the "_picorv32a.v_" design on which we will implement the RTL to GDS flow. 
+To carry out the synthesis on this design, we first need to set it up using the below command:
+```
+prep -design picorv32a
+```
+After preparation is complete, we can see a new directory with the latest date is created within the '_runs_' folder in '_picorv32a_' directory.
+
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs
+```
 
 ## Review files after design prep and run synthesis
+
+When we open the newly created directory, every subdirectory will be empty since no operations have been performed on the design yet. 
+There will be a directory named "tmp".
+![image](https://github.com/user-attachments/assets/3a472ec5-76d6-40a0-98c5-9bee3ff4f795)
+"tmp" contains various types of files and one of them is "merged.lef". This file includes information about metal layer levels and cell levels. 
+Let's use the following command to open "merged.lef":
+
+```
+less merged.lef
+```
+In the directory ``` /work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/11-07_06-37 ``` there is a "config. tcl", which shows default parameter taken by the run.
+
+To perform synthesis on the design use the following command :
+```
+run_synthesis
+```
 
 ## Characterization of Synthesized Results
 First, we calculate the flip-flop ratio. Now, if we see the synthesized results we find that
