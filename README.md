@@ -118,6 +118,55 @@ Also, Now if we go to:
 we can find the synthesis results stored here now.
 
 # THEORY 2: GOOD FLOORPLAN VS BAD FLOORPLAN & INTRODUCTION TO LIBRARY CELLS
+## CHIP FLOORPLANNING CONSIDERATIONS
+### UTILIZATION FACTOR AND ASPECT RATIO
+
+To calculate the utilization factor & aspect ratio, first, we need to calculate the height and width of the core and die. The core and die area are shown
+below:
+
+
+The design's netlist will determine the core area's dimensions, which is based on the number of components used to implement the design logic.
+ Consequently,from the figure above we can see that the die area's height and width depend on the core area's dimensions.
+ For example, consider a netlist which has two logic gates and two flipflops.
+
+
+If we consider each component having an area of 1 sq. unit.  Now, our netlist contains 4 components and therefore the
+minimum total area required for the core area will be 4 sq. units.
+
+* **Utilization Factor:** The ratio of the core area occupied by the netlist to the total core area is defined as the Utilization Factor.
+In an effective floor plan, the Utilization Factor should be less than 1, becuase if the Utilization Factor reaches 1,
+there will be no available space for adding any additional logic, making it a poor floorplan.
+
+Utilization Factor = Area occupied by netlist / Total core area
+
+* **Aspect Ratio:** The ratio of the height of the core to its width is defined as the Aspect Ratio.
+When the Aspect Ratio is 1, the core is considered to be square-shaped. If the Aspect Ratio is different from 1, the core will have a rectangular shape.
+
+Aspect Ratio = Height of the core / Width of the core
+
+For the above figure:
+
+Utilisation Factor = 4 sq units/4sq units = 1
+Aspect Ratio = 2 units/2 units = 1 i.e core is Square Shaped
+
+Similarly, for another case given below:
+
+
+Utilisation Factor = 4 sq units/8 sq units = 0.5
+Aspect Ratio = 2 units/4 units = 0.5 i.e core has Rectangular Shape
+
+### PREPLACED CELLS
+A complex combinational logic circuit which may contain thousands of gates can be placed at a predefined location within the layout.
+Preplacement  involves identifying and positioning critical components or blocks,
+such as memory modules, clock gating cells, comparators, and multiplexers. The arrangement of these preplaced cells,
+other IPs, and stdcells within the design layout is known as floorplanning. These IPs and blocks have user-defined locations and are placed
+in the chip before automated placement and routing. Therefore, they are called pre-placed cells. 
+
+### DECOUPLING CAPACITOR
+
+In circuits, certain high-power components may not receive adequate power from the source due to voltage drops in the connecting wires, causing their operation to fall outside their required voltage range for reliable switching. To address this issue, decoupling capacitors (De-cap cells) are strategically placed near these power-intensive components. These capacitors are connected to the power source and charge to a high level when no switching occurs. When switching activities commence, the decoupling capacitors quickly discharge to supply the necessary power directly to these components. Once switching ceases, the capacitors recharge, ensuring consistent and reliable power delivery to critical circuit components. This mechanism is essential in circuit design to maintain stable operation and prevent performance issues caused by fluctuating power supply conditions.
+
+
 ## LIBRARY BINDING AND PLACEMENTS
 ### Netlist binding and initial place design
 Each component in the netlist (AND gate, OR gate, FF, etc) has a corresponding physical dimension of square or rectangle shape i.e. they have width and height. 
