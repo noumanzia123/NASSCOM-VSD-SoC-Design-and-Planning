@@ -123,15 +123,18 @@ we can find the synthesis results stored here now.
 
 To calculate the utilization factor & aspect ratio, first, we need to calculate the height and width of the core and die. The core and die area are shown
 below:
+![image](https://github.com/user-attachments/assets/c6353b15-1e3b-4785-8ee4-803a2cc199a1)
 
 
 The design's netlist will determine the core area's dimensions, which is based on the number of components used to implement the design logic.
  Consequently,from the figure above we can see that the die area's height and width depend on the core area's dimensions.
- For example, consider a netlist which has two logic gates and two flipflops.
+ For example, consider a netlist that has two logic gates and two flipflops.
+![image](https://github.com/user-attachments/assets/966acce5-ea81-42f5-83ee-0f101ef270e1)
 
 
 If we consider each component having an area of 1 sq. unit.  Now, our netlist contains 4 components and therefore the
 minimum total area required for the core area will be 4 sq. units.
+![image](https://github.com/user-attachments/assets/8f683bd3-83c5-4161-854a-6fc0b40393f1)
 
 * **Utilization Factor:** The ratio of the core area occupied by the netlist to the total core area is defined as the Utilization Factor.
 In an effective floor plan, the Utilization Factor should be less than 1, becuase if the Utilization Factor reaches 1,
@@ -141,19 +144,23 @@ Utilization Factor = Area occupied by netlist / Total core area
 
 * **Aspect Ratio:** The ratio of the height of the core to its width is defined as the Aspect Ratio.
 When the Aspect Ratio is 1, the core is considered to be square-shaped. If the Aspect Ratio is different from 1, the core will have a rectangular shape.
-
+```
 Aspect Ratio = Height of the core / Width of the core
-
+```
 For the above figure:
-
+```
 Utilisation Factor = 4 sq units/4sq units = 1
 Aspect Ratio = 2 units/2 units = 1 i.e core is Square Shaped
+```
+![image](https://github.com/user-attachments/assets/e84e4b89-601d-4b92-8683-04b19d75f37c)
 
 Similarly, for another case given below:
 
-
+```
 Utilisation Factor = 4 sq units/8 sq units = 0.5
 Aspect Ratio = 2 units/4 units = 0.5 i.e core has Rectangular Shape
+```
+![image](https://github.com/user-attachments/assets/e3d34aa0-a21f-4b13-9d8d-385844df88d1)
 
 ### PREPLACED CELLS
 A complex combinational logic circuit which may contain thousands of gates can be placed at a predefined location within the layout.
@@ -161,6 +168,7 @@ Preplacement  involves identifying and positioning critical components or blocks
 such as memory modules, clock gating cells, comparators, and multiplexers. The arrangement of these preplaced cells,
 other IPs, and stdcells within the design layout is known as floorplanning. These IPs and blocks have user-defined locations and are placed
 in the chip before automated placement and routing. Therefore, they are called pre-placed cells. 
+![image](https://github.com/user-attachments/assets/2ffd8edc-dfa3-4e5c-8bfd-ef1ad07bcad2)
 
 ### DECOUPLING CAPACITOR
 
@@ -171,8 +179,28 @@ are placed near these power-intensive components. Now, when switching activities
 directly to these components. Once switching ceases, the capacitors recharge, ensuring consistent and reliable power
 delivery to critical circuit components. Therefore, decap cells work as charge reservoirs to support the power delivery network and make it robust.  
 Decaps are essential in circuit design to maintain stable operation and prevent performance issues caused by fluctuating power supply conditions.
+![image](https://github.com/user-attachments/assets/aa23ee17-ad68-4d76-b5a3-9795eae9005b)
 
 
+### POWER PLANNING
+Decoupling capacitors alone are not enough to manage power distribution for various blocks. De-cap cells come with limitations,
+such as leakage power and increased chip area. Therefore, power planning is used for efficient power delivery. 
+In areas of the chip with significant switching activity, two phenomena can occur: voltage drop and ground bounce.
+**Voltage Drop:** When a group of cells switch from 0 to 1 simultaneously, there is a high power demand. 
+If the power is supplied from a single source, there is a drop in input voltage required for these cells due to insufficient power.
+This issue becomes problematic when the voltage level falls below the noise margin.<br/> 
+
+**Ground Bounce:**  when a group of cells switch from 1 to 0 simultaneously, dumping power to the ground pin at the same time. 
+This causes the ground voltage to rise briefly instead of remaining at the ground. This leads to a phenomenon known as ground bounce.
+The issue arises when the voltage level exceeds the noise margin.
+![image](https://github.com/user-attachments/assets/f629f52a-71cf-460e-b6c0-ae5ac8fed180)
+
+Power planning involves creating two separate power meshes: one for Vdd and another for ground. These meshes are typically implemented
+using the top two metal layers to minimize voltage drops. They are spread across the chip design and connected
+to multiple Vdd and ground sources as shown in Figure below. With this approach, when a cell requires power to switch from 0 to 1,
+it draws from the nearest Vdd layer. Conversely, when a cell needs to drain power,
+it discharges to the nearest ground layer. This ensures stable and efficient power distribution throughout the chip.
+![image](https://github.com/user-attachments/assets/a549cd3e-317c-4e60-863f-cdc6c8a0303b)
 
 ## LIBRARY BINDING AND PLACEMENTS
 ### Netlist binding and initial place design
