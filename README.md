@@ -164,7 +164,14 @@ in the chip before automated placement and routing. Therefore, they are called p
 
 ### DECOUPLING CAPACITOR
 
-In circuits, certain high-power components may not receive adequate power from the source due to voltage drops in the connecting wires, causing their operation to fall outside their required voltage range for reliable switching. To address this issue, decoupling capacitors (De-cap cells) are strategically placed near these power-intensive components. These capacitors are connected to the power source and charge to a high level when no switching occurs. When switching activities commence, the decoupling capacitors quickly discharge to supply the necessary power directly to these components. Once switching ceases, the capacitors recharge, ensuring consistent and reliable power delivery to critical circuit components. This mechanism is essential in circuit design to maintain stable operation and prevent performance issues caused by fluctuating power supply conditions.
+ In IC, there is a region of input transition where both the nMOS and pMOS are conducting together. A large short circuit current  will flow for that instant.
+ If a large number of such cells are placed together and switching together, hence a large current will be required. This large current requirement may drop the
+ VDD or may increase the ground voltage which is called voltage droop or ground bounce. To address this issue, decoupling capacitors or decap cells 
+are placed near these power-intensive components. Now, when switching activities occur, the decoupling capacitors quickly discharge to supply the necessary power
+directly to these components. Once switching ceases, the capacitors recharge, ensuring consistent and reliable power
+delivery to critical circuit components. Therefore, decap cells work as charge reservoirs to support the power delivery network and make it robust.  
+Decaps are essential in circuit design to maintain stable operation and prevent performance issues caused by fluctuating power supply conditions.
+
 
 
 ## LIBRARY BINDING AND PLACEMENTS
